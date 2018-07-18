@@ -60,6 +60,50 @@ class Equipamento extends CI_Controller {
 		}
 	}
 
+    public function consultaEquipamentos() {
+//        $this->output->enable_profiler(TRUE);
+        $this->session_verifier();
+        $id = $this->input->get("id");
+        $this->load->model("equipamento_model", "equipamento");
+        $equipamento = $this->equipamento->buscaPorIdEstabelecimento($id);
+
+        $dados = array("equipamento" => $equipamento);
+
+        $this->load->view('admin/estabelecimento_equipamento', $dados);
+    }
+
+    public function view() {
+        $this->session_verifier();
+        $id = $this->input->get("id");
+        $this->load->model("equipamento_model", "equipamento");
+        $equipamento = $this->equipamento->buscaPorIdEquipamento($id);
+
+        $dados = array("equipamento" => $equipamento);
+
+        $this->load->view('admin/detalhes_equipamento', $dados);
+    }
+
+    public function novo() {
+        $this->session_verifier();
+        $this->load->view('admin/novo_equipamento');
+    }
+
+    public function add() {
+        $this->session_verifier();
+        $id = $this->input->get("id");
+
+        $this->load->model("equipamento_model", "equipamento");
+        $this->equipamento->inserir($id);
+    }
+
+    public function edit() {
+        $this->session_verifier();
+        $id = $this->input->get("id");
+
+        $this->load->model("equipamento_model", "equipamento");
+        $this->equipamento->atualizarPorId($id);
+    }
+
 	public function session_verifier() {
 		if($this->session->userdata('usuario_logado')==false) {
 			redirect('login');

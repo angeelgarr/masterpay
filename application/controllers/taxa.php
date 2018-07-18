@@ -27,6 +27,36 @@ class Taxa extends CI_Controller {
         $this->load->view('includes/footer');
 	}
 
+    public function consultaTaxas() {
+        $this->session_verifier();
+        $id = $this->input->get("id");
+        $this->load->model("taxa_model", "taxa");
+        $taxa = $this->taxa->buscaPorIdEstabelecimento($id);
+
+        $dados = array("taxa" => $taxa);
+
+        $this->load->view('admin/estabelecimento_taxa', $dados);
+    }
+
+    public function view() {
+        $this->session_verifier();
+        $id = $this->input->get("id");
+        $this->load->model("taxa_model", "taxa");
+        $taxa = $this->taxa->buscaPorIdTaxa($id);
+
+        $dados = array("taxa" => $taxa);
+
+        $this->load->view('admin/detalhes_taxa', $dados);
+    }
+
+    public function edit() {
+        $this->session_verifier();
+        $id = $this->input->get("id");
+
+        $this->load->model("taxa_model", "taxa");
+        $this->taxa->atualizarPorId($id);
+    }
+
 	public function session_verifier() {
 		if($this->session->userdata('usuario_logado')==false) {
 			redirect('login');

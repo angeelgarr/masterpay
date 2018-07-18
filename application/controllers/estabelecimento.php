@@ -88,23 +88,58 @@ class Estabelecimento extends CI_Controller {
 		}
 	}
 	
-	public function listar() {
+    public function listar() {
+        $this->session_verifier();
+        $this->db->select('*, tab_estabelecimento.id as id_estabelecimento');
+        $this->db->join('tab_proprietario','tab_estabelecimento.owner_id=tab_proprietario.id','inner');
+        $this->db->join('tab_banco','tab_estabelecimento.id=tab_banco.estabelecimento_id','left');
 
-		$this->session_verifier();
-		$this->db->select('*');
-		$this->db->join('tab_proprietario','tab_estabelecimento.owner_id=tab_proprietario.id','inner');
-		$this->db->join('tab_banco','tab_estabelecimento.id=tab_banco.estabelecimento_id','left');
-		
-		$dados['estabelecimentos'] = $this->db->get('tab_estabelecimento')->result();
+        $dados['estabelecimentos'] = $this->db->get('tab_estabelecimento')->result();
 
-		$this->load->view('includes/header');
-		$this->load->view('includes/side_menu');
-		$this->load->view('includes/top_menu');
-		
+        $this->load->view('includes/header');
+        $this->load->view('includes/side_menu');
+        $this->load->view('includes/top_menu');
+
         $this->load->view('admin/estabelecimento_consulta', $dados);
-        
+
         $this->load->view('includes/footer');
-	}
+    }
+
+    public function detalhar() {
+        $this->session_verifier();
+        $id = $this->input->get("id");
+        $this->load->model("estabelecimentos_model", "estabelecimentos");
+        $estabelecimento = $this->estabelecimentos->buscaPorId($id);
+
+        $dados = array("estabelecimento" => $estabelecimento);
+
+        $this->load->view('admin/estabelecimento_detalhes', $dados);
+    }
+
+    public function view() {
+        $this->session_verifier();
+        $id = $this->input->get("id");
+        $this->load->model("estabelecimentos_model", "estabelecimento");
+        $estabelecimento = $this->estabelecimento->buscaPorId($id);
+
+        $this->db->select('*');
+        $categorias =  $this->db->get('tab_categoria')->result();
+
+        $dados = array(
+            "estabelecimento" => $estabelecimento,
+            "categorias" => $categorias
+        );
+
+        $this->load->view('admin/estabelecimento_detalhe', $dados);
+    }
+
+    public function edit() {
+        $this->session_verifier();
+        $id = $this->input->get("id");
+
+        $this->load->model("estabelecimentos_model", "estabelecimento");
+        $this->estabelecimento->atualizarPorId($id);
+    }
 
 	public function session_verifier() {
 		if($this->session->userdata('usuario_logado')==false) {

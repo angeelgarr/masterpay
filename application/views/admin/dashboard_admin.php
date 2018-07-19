@@ -63,6 +63,12 @@
           <!-- top tiles -->
           <div class="row tile_count">
 
+          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+              <span class="count_top"><i class="fa fa-money"></i> Transações Hoje</span>
+              <div class="count blue"><?= number_format($total_transacoes_dia,2,',','.'); ?></div>
+              <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
+            </div>
+
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-money"></i> Vendas Hoje</span>
               <div class="count blue"><?= number_format($total_vendas_dia,2,',','.'); ?></div>

@@ -106,6 +106,8 @@ class Dashboard extends CI_Controller {
 		$data['total_lucro_aluguel_dia']		= $this->admin_model->total_lucro_aluguel_dia()['total_lucro_aluguel_dia'];
 		$data['total_transacoes_dia']			= $this->admin_model->total_transacoes_dia()['total_transacoes_dia'];
 
+		$data['total_lucro_dia_geral']          = $data['total_lucro_dia_geral'] + $data['total_lucro_aluguel_dia'];
+
 		$this->load->view('includes/header');
 		$this->load->view('includes/side_menu');
 		$this->load->view('includes/top_menu');

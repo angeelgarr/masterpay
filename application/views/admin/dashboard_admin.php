@@ -65,19 +65,19 @@
 
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-money"></i> Transações Hoje</span>
-              <div class="count blue"><?= number_format($total_transacoes_dia,2,',','.'); ?></div>
+              <div class="count"><?php echo $total_transacoes_dia ?></div>
               <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
             </div>
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-money"></i> Vendas Hoje</span>
-              <div class="count blue"><?= number_format($total_vendas_dia,2,',','.'); ?></div>
+              <div class="count green"><?= number_format($total_vendas_dia,2,',','.'); ?></div>
               <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
             </div>
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-money"></i> Lucro Taxas Hoje</span>
-              <div class="count blue"><?= number_format($total_lucro_dia_taxas,2,',','.'); ?></div>
+              <div class="count green"><?= number_format($total_lucro_dia_taxas,2,',','.'); ?></div>
               <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
             </div>
 
@@ -95,12 +95,12 @@
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-money"></i>Lucro Total Hoje </span>
-              <div class="count green"><?= number_format($total_lucro_dia_geral,2,',','.'); ?></div>
+              <div class="count blue"><?= number_format($total_lucro_dia_geral,2,',','.'); ?></div>
               <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
             </div>
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
               <span class="count_top"><i class="fa fa-money"></i> Ticket Médio Hoje</span>
-              <div class="count blue"><?= number_format($ticket_medio_dia,2,',','.'); ?></div>
+              <div class="count red"><?= number_format($ticket_medio_dia,2,',','.'); ?></div>
               <!-- <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span> -->
             </div>
           </div>

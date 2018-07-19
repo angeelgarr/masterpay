@@ -31,7 +31,10 @@ class Banco extends CI_Controller {
         $this->load->model("banco_model", "banco");
         $banco = $this->banco->buscaPorId($id);
 
-        $dados = array("banco" => $banco);
+        $dados = array(
+            "banco" => $banco,
+            "id_estabelecimento" => $id
+        );
 
         $this->load->view('admin/estabelecimento_banco', $dados);
     }

@@ -86,4 +86,6 @@
         <input type="text" id="conta" class="form-control" name="conta"
                data-parsley-trigger="change" value="<?= $banco["conta"]; ?>" required/>
     </div>
+
+    <input type="hidden" name="id_estabelecimento" value="<?= $id_estabelecimento; ?>" />
 </form>

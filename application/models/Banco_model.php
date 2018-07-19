@@ -26,12 +26,24 @@ class Banco_model extends CI_Model
         $dados['data_inclusao'] = date('Y-m-d H:i:s');
         $dados['tipo_conta'] = $this->input->post('tipo');
 
-        if ($this->db->update('tab_banco', $dados)) {
-            $this->session->set_flashdata('alerta', 'Banco atualizado com sucesso!');
-            redirect('estabelecimento/listar');
+        if($id) {
+            if ($this->db->update('tab_banco', $dados)) {
+                $this->session->set_flashdata('alerta', 'Banco atualizado com sucesso!');
+                redirect('estabelecimento/listar');
+            } else {
+                $this->session->set_flashdata('alerta', 'Ocorreu um erro ao tentar atualizar banco!');
+                redirect('estabelecimento/listar');
+            }
         } else {
-            $this->session->set_flashdata('alerta', 'Ocorreu um erro ao tentar atualizar banco!');
-            redirect('estabelecimento/listar');
+            $dados['estabelecimento_id'] = $this->input->post('id_estabelecimento');
+
+            if($this->db->insert('tab_banco',$dados)){
+                $this->session->set_flashdata('alerta','Banco cadastrado com sucesso!');
+                redirect('estabelecimento/listar');
+            } else {
+                $this->session->set_flashdata('alerta','Ocorreu um erro ao tentar cadastrar o banco!');
+                redirect('estabelecimento/listar');
+            }
         }
     }
 }

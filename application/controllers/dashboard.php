@@ -92,7 +92,19 @@ class Dashboard extends CI_Controller {
 		$data['total_transacoes'] 			= $this->dashboard_model->total_transacoes()['total'];
 		$data['total_vendas'] 	  			= $this->dashboard_model->total_vendas()['total_vendas'];
 
+		$data['lucro_antecipacao_por_periodo'] 	  			= $this->admin_model->lucro_antecipacao_por_periodo();
+
 		$data['receita_total']				= $data['total_liquido_lucro']+$data['lucros_total_aluguel'];
+
+		// informações do dia
+
+		$data['total_vendas_dia'] 	  	    	= $this->admin_model->total_vendas_dia()['total_vendas_dia'];
+		$data['ticket_medio_dia']				= $this->admin_model->ticket_medio_dia()['ticket_medio_dia'];
+		$data['total_lucro_dia_taxas']      	= $this->admin_model->total_lucro_dia_taxas()['total_lucro_dia_taxas'];
+		$data['total_lucro_dia_antecipacao']    = $this->admin_model->total_lucro_dia_antecipacao()['total_lucro_dia_antecipacao'];
+		$data['total_lucro_dia_geral']			= $this->admin_model->total_lucro_dia_geral()['total_lucro_dia_geral'];
+		$data['total_lucro_aluguel_dia']		= $this->admin_model->total_lucro_aluguel_dia()['total_lucro_aluguel_dia'];
+		$data['total_transacoes_dia']			= $this->admin_model->total_transacoes_dia()['total_transacoes_dia'];
 
 		$this->load->view('includes/header');
 		$this->load->view('includes/side_menu');

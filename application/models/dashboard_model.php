@@ -99,7 +99,7 @@ class Dashboard_model extends CI_Model {
 			$this->db->where_not_in('t.product_name','CANCELAMENTO');
 			$total = $this->db->get('tab_transacao_processada as t')->row_array();
 		} else {
-			$this->db->select('sum(r.lucro_masterpay) as total_liquido_lucro, t.product_name');
+			$this->db->select('sum(r.lucro_masterpay)+sum(r.lucro_antecipacao) as total_liquido_lucro, t.product_name');
 			$this->db->join('tab_transacao_processada as t', 't.id=r.transacao_pagamento_processado_id');
 			$this->db->where_not_in('t.product_name','CANCELAMENTO');
 			$total = $this->db->get('tab_transacao_repasse as r')->row_array();

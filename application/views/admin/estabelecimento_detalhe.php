@@ -1,6 +1,3 @@
-<!-- Custom Theme Scripts -->
-<script src="<?= base_url(); ?>assets/build/js/custom.min.js"></script>
-
 <form id="formEdit" method="post" action="<?= base_url(); ?>estabelecimento/edit?id=<?= $estabelecimento["id"]; ?>"
       data-parsley-validate>
     <?php if ($error = $this->session->flashdata('alerta')): ?>
@@ -173,3 +170,18 @@
         padding: 0;
     }
 </style>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($("input.flat")[0]) {
+            $(document).ready(function () {
+                $('input.flat').iCheck({
+                    checkboxClass: 'icheckbox_flat-green',
+                    radioClass: 'iradio_flat-green'
+                });
+            });
+        }
+        init_InputMask();
+        NProgress.done();
+    });
+</script>

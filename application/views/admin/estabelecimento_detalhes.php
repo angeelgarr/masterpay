@@ -1,4 +1,3 @@
-<input type="hidden" id="idEstabelecimento" value="<?= $estabelecimento["id"]; ?>" />
 <div class="modal-header">
     <h3 class="modal-title" id="modal">Detalhes do Estabelecimento</h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

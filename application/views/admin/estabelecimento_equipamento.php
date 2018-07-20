@@ -63,9 +63,9 @@
             $("#btn-edit, #btnSave").show();
             $("#btn-novo, #btnEdit, #btnCancel, .select-equipamento").hide();
 
-            var idEstabelecimento = $("#idEstabelecimento").val();
-            $("#formEdit").attr("action", "" + base_url + "equipamento/add?id=" + idEstabelecimento);
-            var url = base_url + "equipamento/novo";
+            var idEstabelecimento = <?= $id_estabelecimento; ?>;
+            $("#formEdit").attr("action", "" + base_url + "equipamento/add");
+            var url = base_url + "equipamento/novo?id=" + idEstabelecimento;
             showEquipamento(url);
         });
 

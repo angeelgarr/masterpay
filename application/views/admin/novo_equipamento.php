@@ -21,3 +21,5 @@
     <input type="text" id="valor" class="form-control" name="valor"
            data-parsley-trigger="change" value="" required/>
 </div>
+
+<input type="hidden" name="id_estabelecimento" value="<?= $id_estabelecimento; ?>" />

@@ -67,7 +67,10 @@ class Equipamento extends CI_Controller {
         $this->load->model("equipamento_model", "equipamento");
         $equipamento = $this->equipamento->buscaPorIdEstabelecimento($id);
 
-        $dados = array("equipamento" => $equipamento);
+        $dados = array(
+            "equipamento" => $equipamento,
+            "id_estabelecimento" => $id
+        );
 
         $this->load->view('admin/estabelecimento_equipamento', $dados);
     }
@@ -85,15 +88,18 @@ class Equipamento extends CI_Controller {
 
     public function novo() {
         $this->session_verifier();
-        $this->load->view('admin/novo_equipamento');
+        $id = $this->input->get("id");
+
+        $dados = array("id_estabelecimento" => $id);
+
+        $this->load->view('admin/novo_equipamento', $dados);
     }
 
     public function add() {
         $this->session_verifier();
-        $id = $this->input->get("id");
 
         $this->load->model("equipamento_model", "equipamento");
-        $this->equipamento->inserir($id);
+        $this->equipamento->inserir();
     }
 
     public function edit() {

@@ -52,13 +52,13 @@ class Equipamento_model extends CI_Model
         }
     }
 
-    public function inserir($id)
+    public function inserir()
     {
         $dados['data_inicio_cobranca'] = $this->input->post('data_inicio_cobranca');
         $dados['equipamento'] = $this->input->post('equipamento');
         $dados['quantidade'] = $this->input->post('quantidade');
         $dados['valor'] = $this->input->post('valor');
-        $dados['estabelecimento_id'] = $id;
+        $dados['estabelecimento_id'] = $this->input->post('id_estabelecimento');
 
         if($this->db->insert('tab_controle_aluguel_equipamento',$dados)){
             $this->session->set_flashdata('alerta','Equipamento cadastrado com sucesso!');

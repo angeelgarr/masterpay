@@ -35,6 +35,7 @@ class Compensacao extends CI_Controller {
 		 $this->db->select('c.id,c.status,c.dia_repasse,c.data_confirmacao, c.total_credito,c.total_debito,c.total_geral,e.comercial_name,c.valor_desconto');
 		 $this->db->join('tab_estabelecimento as e','c.merchant=e.merchant','inner');
 		 $this->db->order_by('c.status','ASC');
+		 $this->db->order_by('c.data_confirmacao','DESC');
 		 $dados['contas'] = $this->db->get('tab_conta_corrente_transacao as c')->result();
 	
 		 $this->load->view('includes/header');

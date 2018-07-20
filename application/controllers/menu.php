@@ -155,11 +155,16 @@ class Menu extends CI_Controller {
 
 	public function compensacao() {
 		$this->session_verifier();
+		
+		$usuario = $this->session->userdata('usuario_logado');
 
 		$this->db->select('c.id,c.status,c.dia_repasse,c.data_confirmacao, c.total_credito,c.total_debito,c.total_geral,e.comercial_name,c.valor_desconto');
 		$this->db->join('tab_estabelecimento as e','c.merchant=e.merchant','inner');
+		if($usuario['perfil']=='CLIENTE') {
+			$this->db->where('e.id',$usuario['estabelecimento_id']);
+		}
 		$this->db->order_by('c.status', 'ASC');
-		$this->db->order_by('c.data_confirmacao', 'ASC');
+		$this->db->order_by('c.data_confirmacao', 'DESC');
 		$dados['contas'] = $this->db->get('tab_conta_corrente_transacao as c')->result();
 
 		$this->load->view('includes/header');

@@ -88,9 +88,12 @@
                             <?php if(!$detect->isMobile()) { ?>
                             <?php if ($item->status==0) { ?>
                               <td style="text-align: center;">
+                             
+                              <?php if($this->session->userdata('usuario_logado')['perfil'] !='CLIENTE') { ?>
                                 <a href="<?= base_url('compensacao/confirmar/'.$item->id);?>" onclick="return confirm('Deseja realmente confirmar o pagamento do item selecionado?');">
                                   <span class="label label-primary">CONFIRMAR</span>
                                 </a>
+                              <?php } ?>
 
                                  <a href="#" id="<?= $item->id ?>" onclick="showModal(<?= $item->id ?>);">
                                   <span class="label label-warning">DETALHAR</span>

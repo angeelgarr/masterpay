@@ -98,4 +98,25 @@ class Transacao_model extends CI_Model {
         }
         return $dados;
     }
+
+    public function demostrativo_transacoes() {
+        $select = 'te.comercial_name, tr.numero_autorizacao,
+                    tr.valor_transacao, tr.taxa_stone,
+                    tr.valor_stone,tr.taxa_masterpay,tr.lucro_masterpay, tr.taxa_antecipacao,
+                    tr.valor_transacao - (tr.valor_transacao*(tr.taxa_masterpay/100)) as liquido_antes_antec,
+                    (tr.valor_transacao - (tr.valor_transacao*(tr.taxa_masterpay/100)))-((tr.valor_transacao - (tr.valor_transacao*(tr.taxa_masterpay/100)))*tr.taxa_antecipacao/100) as liquido_apos_antec,
+                    (tr.valor_transacao - (tr.valor_transacao*(tr.taxa_masterpay/100))) * (tr.taxa_antecipacao/100) as lucro_antec';
+        
+        $from = 'tab_transacao_repasse tr, 
+                 tab_estabelecimento te';
+             
+        $where = 'tr.estabelecimento_id=te.id     
+                and te.antecipa=1
+                and tr.taxa_antecipacao > 0';
+
+        $this->db->select($select);
+        $this->db->where($where);
+        return $this->db->get($from)->result();
+
+    }
 }

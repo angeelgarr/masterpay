@@ -14,6 +14,7 @@
                         <ul class="nav child_menu">
                           <li><a href="<?= base_url();?>dashboard/teds">Controle de TED's</a></li>
                           <li><a href="<?= base_url() ?>dashboard/admin">Dashboard Admin</a></li>
+                          <li><a href="<?= base_url() ?>demonstrativo">Demonstrativo Antecipação</a></li>
                           <li><a href="<?= base_url() ?>dashboard/graficos">Gráficos</a></li>
                         </ul>
                     </li>
@@ -23,7 +24,7 @@
                  <li><a><i class="fa fa-bank"></i> Estabelecimento <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <!-- <li><a href="<?= base_url() ?>estabelecimento">Incluir Loja</a></li> -->
-                      <!-- <li><a href="<?= base_url() ?>menu/bancos">Incluir Banco</a></li> -->
+                     <!-- <li><a href="<?= base_url() ?>menu/bancos">Incluir Banco</a></li>  -->
                       <li><a href="<?= base_url() ?>estabelecimento/listar">Consultar</a></li>
                     </ul>
                   <?php } ?>
@@ -37,9 +38,7 @@
                   <li><a><i class="fa fa-usd"></i> Pagamentos <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?= base_url();?>menu/repasses">Consultar Repasses</a></li>
-                       <?php if($this->session->userdata('usuario_logado')['perfil'] !='CLIENTE') { ?>
-                            <li><a href="<?= base_url();?>menu/compensacao">Consultar Pagamentos</a></li>
-                      <?php } ?>
+                      <li><a href="<?= base_url();?>menu/compensacao">Consultar Pagamentos</a></li>
                       <!-- <li><a href="form_advanced.html">Dashboard</a></li> -->
                     </ul>
                   </li>

@@ -6,9 +6,14 @@ class Menu extends CI_Controller
 
     public function transacoes()
     {
+//        $this->output->enable_profiler(TRUE);
         $this->session_verifier();
         $this->load->model('transacao_model', 'transacao');
         $usuario = $this->session->userdata('usuario_logado');
+
+        $this->session->dataInicio = "";
+        $this->session->dataFim = "";
+        $this->session->textSearch = "";
 
         $this->load->library('pagination');
         $config['base_url'] = base_url() . 'menu/transacoes';
@@ -47,6 +52,7 @@ class Menu extends CI_Controller
         $dados = array(
             "transacoes" => $transacoes,
             "pagination" => $pagination,
+            "textSearch" => "",
             "dataInicio" => "",
             "dataFim" => ""
         );
@@ -62,9 +68,23 @@ class Menu extends CI_Controller
 
     public function transacoesIntervalo()
     {
+//        $this->output->enable_profiler(TRUE);
         $this->session_verifier();
         $this->load->model('transacao_model', 'transacao');
         $usuario = $this->session->userdata('usuario_logado');
+
+        $textSearch = $this->input->post('textsearch');
+
+        if ($this->input->post('textsearch')) {
+            $this->session->textSearch = $this->input->post('textsearch');
+            $textSearch = $this->session->textSearch;
+        } else {
+            if(is_null($this->input->post('textsearch'))) {
+                $textSearch = $this->session->textSearch;
+            } else {
+                $textSearch = "";
+            }
+        }
 
         if ($this->input->post('datainicio')) {
             $this->session->dataInicio = $this->input->post('datainicio');
@@ -86,6 +106,10 @@ class Menu extends CI_Controller
             } else {
                 $dtFim = "";
             }
+        }
+
+        if($textSearch == "" && $dtInicio == "" && $dtFim == "") {
+            redirect('menu/transacoes');
         }
 
 		$this->load->library('pagination');
@@ -115,7 +139,8 @@ class Menu extends CI_Controller
 
 		$page = $this->uri->segment(3, 0);
 
-        $transacoes = $this->transacao->transacoesIntervalo($usuario, $config['per_page'], $page, $dtInicio, $dtFim)['transacoes']->result();
+        $transacoes = $this->transacao->transacoesIntervalo($usuario, $config['per_page'], $page, $dtInicio, $dtFim, $textSearch)['transacoes']->result();
+
 		$config['total_rows'] = $this->transacao->getTotalRows();
 
 		$this->pagination->initialize($config);
@@ -125,6 +150,7 @@ class Menu extends CI_Controller
         $dados = array(
             "transacoes" => $transacoes,
             "pagination" => $pagination,
+            "textSearch" => $textSearch,
             "dataInicio" => $dtInicio,
             "dataFim" => $dtFim
         );

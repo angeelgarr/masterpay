@@ -47,7 +47,7 @@ class Transacao_model extends CI_Model {
         return $dados;
     }
 
-    public function transacoesIntervalo($usuario,$limite,$start,$dtInicio,$dtFim) {
+    public function transacoesIntervalo($usuario,$limite,$start,$dtInicio,$dtFim,$textSearch="") {
         if($usuario['perfil']=='CLIENTE') {
             $this->db->select('t.*');
             $this->db->where('e.id',$usuario['estabelecimento_id']);
@@ -60,14 +60,35 @@ class Transacao_model extends CI_Model {
             $dados['transacoes'] = $this->db->get('tab_transacao_processada as t');
             $this->lastQuery = $this->db->last_query();
 		} else {
-            $this->db->select('t.*, e.comercial_name');
-            $this->db->where('date_format(t.payment_date,'."'%d/%m/%Y'".') >=',$dtInicio);
-            $this->db->where('date_format(t.payment_date,'."'%d/%m/%Y'".') <=',$dtFim);
-			$this->db->join('tab_estabelecimento as e','t.estabelecimento_id=e.id','inner');
-            $this->db->order_by('t.payment_date','DESC');
-            $this->db->limit($limite,$start);
-            $dados['transacoes'] = $this->db->get('tab_transacao_processada as t');
-            $this->lastQuery = $this->db->last_query();
+            if($dtInicio == "" && $dtFim == "") {
+                $this->db->select('t.*, e.comercial_name');
+                $this->db->like('product_name', $textSearch);
+                $this->db->or_like('brand', $textSearch);
+                $this->db->or_like('FORMAT(value, 2, \'de_DE\')', $textSearch);
+                $this->db->or_like('FORMAT(valor_liquido, 2, \'de_DE\')', $textSearch);
+                $this->db->or_like('authorization_number', $textSearch);
+                $this->db->or_like('comercial_name', $textSearch);
+                $this->db->join('tab_estabelecimento as e','t.estabelecimento_id=e.id','inner');
+                $this->db->order_by('t.payment_date','DESC');
+                $this->db->limit($limite,$start);
+                $dados['transacoes'] = $this->db->get('tab_transacao_processada as t');
+                $this->lastQuery = $this->db->last_query();
+            } else {
+                $this->db->select('t.*, e.comercial_name');
+                $this->db->like('product_name', $textSearch);
+                $this->db->or_like('brand', $textSearch);
+                $this->db->or_like('FORMAT(value, 2, \'de_DE\')', $textSearch);
+                $this->db->or_like('FORMAT(valor_liquido, 2, \'de_DE\')', $textSearch);
+                $this->db->or_like('authorization_number', $textSearch);
+                $this->db->or_like('comercial_name', $textSearch);
+                $this->db->where('date_format(t.payment_date,'."'%d/%m/%Y'".') >=',$dtInicio);
+                $this->db->where('date_format(t.payment_date,'."'%d/%m/%Y'".') <=',$dtFim);
+                $this->db->join('tab_estabelecimento as e','t.estabelecimento_id=e.id','inner');
+                $this->db->order_by('t.payment_date','DESC');
+                $this->db->limit($limite,$start);
+                $dados['transacoes'] = $this->db->get('tab_transacao_processada as t');
+                $this->lastQuery = $this->db->last_query();
+            }
         }
         return $dados;
     }

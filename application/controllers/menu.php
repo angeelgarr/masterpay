@@ -68,7 +68,6 @@ class Menu extends CI_Controller
 
     public function transacoesIntervalo()
     {
-//        $this->output->enable_profiler(TRUE);
         $this->session_verifier();
         $this->load->model('transacao_model', 'transacao');
         $usuario = $this->session->userdata('usuario_logado');
@@ -78,6 +77,12 @@ class Menu extends CI_Controller
         if ($this->input->post('textsearch')) {
             $this->session->textSearch = $this->input->post('textsearch');
             $textSearch = $this->session->textSearch;
+            if (!$this->input->post('datainicio')) {
+                $this->session->dataInicio = "";
+            }
+            if (!$this->input->post('datafim')) {
+                $this->session->dataFim = "";
+            }
         } else {
             if(is_null($this->input->post('textsearch'))) {
                 $textSearch = $this->session->textSearch;
@@ -89,6 +94,12 @@ class Menu extends CI_Controller
         if ($this->input->post('datainicio')) {
             $this->session->dataInicio = $this->input->post('datainicio');
             $dtInicio = $this->session->dataInicio;
+            if (!$this->input->post('textsearch')) {
+                $this->session->textSearch = "";
+            }
+            if (!$this->input->post('datafim')) {
+                $this->session->dataFim = "";
+            }
         } else {
             if(is_null($this->input->post('datainicio'))) {
                 $dtInicio = $this->session->dataInicio;
@@ -100,6 +111,12 @@ class Menu extends CI_Controller
         if ($this->input->post('datafim')) {
             $this->session->dataFim = $this->input->post('datafim');
             $dtFim = $this->session->dataFim;
+            if (!$this->input->post('textsearch')) {
+                $this->session->textSearch = "";
+            }
+            if (!$this->input->post('datainicio')) {
+                $this->session->dataInicio = "";
+            }
         } else {
             if(is_null($this->input->post('datafim'))) {
                 $dtFim = $this->session->dataFim;
@@ -170,6 +187,10 @@ class Menu extends CI_Controller
         $this->load->model('transacao_model', 'transacao');
         $usuario = $this->session->userdata('usuario_logado');
 
+        $this->session->dataInicio = "";
+        $this->session->dataFim = "";
+        $this->session->textSearch = "";
+
         $this->load->library('pagination');
         $config['base_url'] = base_url() . 'menu/repasses';
         $config['uri_segment'] = 3;
@@ -197,12 +218,136 @@ class Menu extends CI_Controller
 
         $page = $this->uri->segment(3, 0);
 
-        $dados['repasses'] = $this->transacao->repasses($usuario, $config['per_page'], $page)['repasses']->result();
+        $repasses = $this->transacao->repasses($usuario, $config['per_page'], $page)['repasses']->result();
         $config['total_rows'] = $this->transacao->getTotalRows();
 
         $this->pagination->initialize($config);
 
-        $dados['pagination'] = $this->pagination->create_links();
+        $pagination = $this->pagination->create_links();
+
+        $dados = array(
+            "repasses" => $repasses,
+            "pagination" => $pagination,
+            "textSearch" => "",
+            "dataInicio" => "",
+            "dataFim" => ""
+        );
+
+        $this->load->view('includes/header');
+        $this->load->view('includes/side_menu');
+        $this->load->view('includes/top_menu');
+
+        $this->load->view('admin/repasse_consulta', $dados);
+
+        $this->load->view('includes/footer');
+
+    }
+
+    public function repassesIntervalo()
+    {
+        $this->session_verifier();
+        $this->load->model('transacao_model', 'transacao');
+        $usuario = $this->session->userdata('usuario_logado');
+
+        $textSearch = $this->input->post('textsearch');
+
+        if ($this->input->post('textsearch')) {
+            $this->session->textSearch = $this->input->post('textsearch');
+            $textSearch = $this->session->textSearch;
+            if (!$this->input->post('datainicio')) {
+                $this->session->dataInicio = "";
+            }
+            if (!$this->input->post('datafim')) {
+                $this->session->dataFim = "";
+            }
+        } else {
+            if(is_null($this->input->post('textsearch'))) {
+                $textSearch = $this->session->textSearch;
+            } else {
+                $textSearch = "";
+            }
+        }
+
+        if ($this->input->post('datainicio')) {
+            $this->session->dataInicio = $this->input->post('datainicio');
+            $dtInicio = $this->session->dataInicio;
+            if (!$this->input->post('textsearch')) {
+                $this->session->textSearch = "";
+            }
+            if (!$this->input->post('datafim')) {
+                $this->session->dataFim = "";
+            }
+        } else {
+            if(is_null($this->input->post('datainicio'))) {
+                $dtInicio = $this->session->dataInicio;
+            } else {
+                $dtInicio = "";
+            }
+        }
+
+        if ($this->input->post('datafim')) {
+            $this->session->dataFim = $this->input->post('datafim');
+            $dtFim = $this->session->dataFim;
+            if (!$this->input->post('textsearch')) {
+                $this->session->textSearch = "";
+            }
+            if (!$this->input->post('datainicio')) {
+                $this->session->dataInicio = "";
+            }
+        } else {
+            if(is_null($this->input->post('datafim'))) {
+                $dtFim = $this->session->dataFim;
+            } else {
+                $dtFim = "";
+            }
+        }
+
+        if($textSearch == "" && $dtInicio == "" && $dtFim == "") {
+            redirect('menu/repasses');
+        }
+
+        $this->load->library('pagination');
+        $config['base_url'] = base_url() . 'menu/repassesIntervalo';
+        $config['uri_segment'] = 3;
+        $config['per_page'] = 8;
+
+        //pagination style
+        $config['first_link'] = '|<<';
+        $config['prev_link'] = '<';
+        $config['next_link'] = '>';
+        $config['last_link'] = '>>|';
+
+
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+
+        $page = $this->uri->segment(3, 0);
+
+        $repasses = $this->transacao->repassesIntervalo($usuario, $config['per_page'], $page, $dtInicio, $dtFim, $textSearch)['repasses']->result();
+
+        $config['total_rows'] = $this->transacao->getTotalRows();
+
+        $this->pagination->initialize($config);
+
+        $pagination = $this->pagination->create_links();
+
+        $dados = array(
+            "repasses" => $repasses,
+            "pagination" => $pagination,
+            "textSearch" => $textSearch,
+            "dataInicio" => $dtInicio,
+            "dataFim" => $dtFim
+        );
 
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');

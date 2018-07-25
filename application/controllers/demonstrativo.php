@@ -11,7 +11,8 @@ class Demonstrativo extends CI_Controller {
 		$this->load->model('transacao_model');
 
 		$data['demostrativo_transacoes'] 			= $this->transacao_model->demostrativo_transacoes();
-		
+		$data['lucro_antecipacao_socios'] 			= $this->transacao_model->lucro_antecipacao_socios();
+
 		$this->load->view('includes/header');
 		$this->load->view('includes/side_menu');
 		$this->load->view('includes/top_menu');

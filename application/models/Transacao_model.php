@@ -116,7 +116,20 @@ class Transacao_model extends CI_Model {
 
         $this->db->select($select);
         $this->db->where($where);
+        $this->db->order_by('tr.valor_transacao','DESC');
         return $this->db->get($from)->result();
 
     }
+
+    public function lucro_antecipacao_socios() {
+		$select = 'DATE_FORMAT(tr.data_transacao,'."'%m/%Y'".') as periodo_ref, 
+					sum(tr.lucro_antecipacao) as lucro_antecipacao,
+                    SUM(tr.lucro_antecipacao)*0.6 as investidor,
+                    (SUM(tr.lucro_antecipacao)*0.6)/3 as individual,
+					SUM(tr.lucro_antecipacao)*0.4 as maxpay';
+		$this->db->select($select);
+		$this->db->group_by('periodo_ref');
+		$this->db->order_by('periodo_ref','DESC');
+		return $this->db->get('tab_transacao_repasse tr')->result();
+	}
 }

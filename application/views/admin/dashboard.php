@@ -190,6 +190,11 @@
                                 <span class="label label-warning">
                                   PARCELADO
                                </span>
+                               <?php if($item->parcels > 0) { ?>
+                                <span class="label label-warning">
+                                  (<?= $item->parcels; ?>x)
+                               </span>
+                               <?php } ?>
                               <?php } ?>    
 
                           </td>

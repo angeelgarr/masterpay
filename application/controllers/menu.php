@@ -26,7 +26,6 @@ class Menu extends CI_Controller
         $config['next_link'] = '>';
         $config['last_link'] = '>>|';
 
-
         $config['first_tag_open'] = '<li>';
         $config['first_tag_close'] = '</li>';
         $config['last_tag_open'] = '<li>';
@@ -140,7 +139,6 @@ class Menu extends CI_Controller
 		$config['next_link'] = '>';
 		$config['last_link'] = '>>|';
 
-
 		$config['first_tag_open'] = '<li>';
 		$config['first_tag_close'] = '</li>';
 		$config['last_tag_open'] = '<li>';
@@ -202,7 +200,6 @@ class Menu extends CI_Controller
         $config['next_link'] = '>';
         $config['last_link'] = '>>|';
 
-
         $config['first_tag_open'] = '<li>';
         $config['first_tag_close'] = '</li>';
         $config['last_tag_open'] = '<li>';
@@ -219,6 +216,7 @@ class Menu extends CI_Controller
         $page = $this->uri->segment(3, 0);
 
         $repasses = $this->transacao->repasses($usuario, $config['per_page'], $page)['repasses']->result();
+
         $config['total_rows'] = $this->transacao->getTotalRows();
 
         $this->pagination->initialize($config);
@@ -317,7 +315,6 @@ class Menu extends CI_Controller
         $config['next_link'] = '>';
         $config['last_link'] = '>>|';
 
-
         $config['first_tag_open'] = '<li>';
         $config['first_tag_close'] = '</li>';
         $config['last_tag_open'] = '<li>';
@@ -356,18 +353,58 @@ class Menu extends CI_Controller
         $this->load->view('admin/repasse_consulta', $dados);
 
         $this->load->view('includes/footer');
-
     }
 
     public function compensacao()
     {
         $this->session_verifier();
+        $this->load->model('compensacao_model', 'compensacao');
 
-        $this->db->select('c.id,c.status,c.dia_repasse,c.data_confirmacao, c.total_credito,c.total_debito,c.total_geral,e.comercial_name,c.valor_desconto');
-        $this->db->join('tab_estabelecimento as e', 'c.merchant=e.merchant', 'inner');
-        $this->db->order_by('c.status', 'ASC');
-        $this->db->order_by('c.data_confirmacao', 'ASC');
-        $dados['contas'] = $this->db->get('tab_conta_corrente_transacao as c')->result();
+        $this->session->dataInicio = "";
+        $this->session->dataFim = "";
+        $this->session->textSearch = "";
+
+        $this->load->library('pagination');
+        $config['base_url'] = base_url() . 'menu/compensacao';
+        $config['uri_segment'] = 3;
+        $config['per_page'] = 8;
+
+        //pagination style
+        $config['first_link'] = '|<<';
+        $config['prev_link'] = '<';
+        $config['next_link'] = '>';
+        $config['last_link'] = '>>|';
+
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+
+        $page = $this->uri->segment(3, 0);
+
+        $contas = $this->compensacao->compensacoes($config['per_page'], $page)['contas']->result();
+
+        $config['total_rows'] = $this->compensacao->getTotalRows();
+
+        $this->pagination->initialize($config);
+
+        $pagination = $this->pagination->create_links();
+
+        $dados = array(
+            "contas" => $contas,
+            "pagination" => $pagination,
+            "textSearch" => "",
+            "dataInicio" => "",
+            "dataFim" => ""
+        );
 
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');
@@ -376,7 +413,119 @@ class Menu extends CI_Controller
         $this->load->view('admin/compensacao', $dados);
 
         $this->load->view('includes/footer');
+    }
 
+    public function compensacaoIntervalo()
+    {
+        $this->session_verifier();
+        $this->load->model('compensacao_model', 'compensacao');
+
+        $textSearch = $this->input->post('textsearch');
+
+        if ($this->input->post('textsearch')) {
+            $this->session->textSearch = $this->input->post('textsearch');
+            $textSearch = $this->session->textSearch;
+            if (!$this->input->post('datainicio')) {
+                $this->session->dataInicio = "";
+            }
+            if (!$this->input->post('datafim')) {
+                $this->session->dataFim = "";
+            }
+        } else {
+            if(is_null($this->input->post('textsearch'))) {
+                $textSearch = $this->session->textSearch;
+            } else {
+                $textSearch = "";
+            }
+        }
+
+        if ($this->input->post('datainicio')) {
+            $this->session->dataInicio = $this->input->post('datainicio');
+            $dtInicio = $this->session->dataInicio;
+            if (!$this->input->post('textsearch')) {
+                $this->session->textSearch = "";
+            }
+            if (!$this->input->post('datafim')) {
+                $this->session->dataFim = "";
+            }
+        } else {
+            if(is_null($this->input->post('datainicio'))) {
+                $dtInicio = $this->session->dataInicio;
+            } else {
+                $dtInicio = "";
+            }
+        }
+
+        if ($this->input->post('datafim')) {
+            $this->session->dataFim = $this->input->post('datafim');
+            $dtFim = $this->session->dataFim;
+            if (!$this->input->post('textsearch')) {
+                $this->session->textSearch = "";
+            }
+            if (!$this->input->post('datainicio')) {
+                $this->session->dataInicio = "";
+            }
+        } else {
+            if(is_null($this->input->post('datafim'))) {
+                $dtFim = $this->session->dataFim;
+            } else {
+                $dtFim = "";
+            }
+        }
+
+        if($textSearch == "" && $dtInicio == "" && $dtFim == "") {
+            redirect('menu/compensacao');
+        }
+
+        $this->load->library('pagination');
+        $config['base_url'] = base_url() . 'menu/compensacaoIntervalo';
+        $config['uri_segment'] = 3;
+        $config['per_page'] = 8;
+
+        //pagination style
+        $config['first_link'] = '|<<';
+        $config['prev_link'] = '<';
+        $config['next_link'] = '>';
+        $config['last_link'] = '>>|';
+
+        $config['first_tag_open'] = '<li>';
+        $config['first_tag_close'] = '</li>';
+        $config['last_tag_open'] = '<li>';
+        $config['last_tag_close'] = '</li>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+
+        $page = $this->uri->segment(3, 0);
+
+        $contas = $this->compensacao->compensacoesIntervalo($config['per_page'], $page, $dtInicio, $dtFim, $textSearch)['contas']->result();
+
+        $config['total_rows'] = $this->compensacao->getTotalRows();
+
+        $this->pagination->initialize($config);
+
+        $pagination = $this->pagination->create_links();
+
+        $dados = array(
+            "contas" => $contas,
+            "pagination" => $pagination,
+            "textSearch" => $textSearch,
+            "dataInicio" => $dtInicio,
+            "dataFim" => $dtFim
+        );
+
+        $this->load->view('includes/header');
+        $this->load->view('includes/side_menu');
+        $this->load->view('includes/top_menu');
+
+        $this->load->view('admin/compensacao', $dados);
+
+        $this->load->view('includes/footer');
     }
 
 

@@ -124,7 +124,6 @@ class Transacao_model extends CI_Model {
         return $dados;
     }
 
-<<<<<<< HEAD
     public function demostrativo_transacoes() {
         $select = 'te.comercial_name, tr.numero_autorizacao,
                     tr.valor_transacao, tr.taxa_stone,
@@ -158,7 +157,6 @@ class Transacao_model extends CI_Model {
 		$this->db->order_by('periodo_ref','DESC');
 		return $this->db->get('tab_transacao_repasse tr')->result();
 	}
-=======
     public function repassesIntervalo($usuario,$limite,$start,$dtInicio,$dtFim,$textSearch="") {
 
         if($usuario['perfil']=='CLIENTE') {
@@ -204,5 +202,4 @@ class Transacao_model extends CI_Model {
         }
         return $dados;
     }
->>>>>>> 733efb9bba6647a5c8f0ac0244103d525cac6847
 }

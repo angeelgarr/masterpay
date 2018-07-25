@@ -392,21 +392,6 @@ class Menu extends CI_Controller
 
         $contas = $this->compensacao->compensacoes($config['per_page'], $page)['contas']->result();
 
-<<<<<<< HEAD
-	public function compensacao() {
-		$this->session_verifier();
-		
-		$usuario = $this->session->userdata('usuario_logado');
-
-		$this->db->select('c.id,c.status,c.dia_repasse,c.data_confirmacao, c.total_credito,c.total_debito,c.total_geral,e.comercial_name,c.valor_desconto');
-		$this->db->join('tab_estabelecimento as e','c.merchant=e.merchant','inner');
-		if($usuario['perfil']=='CLIENTE') {
-			$this->db->where('e.id',$usuario['estabelecimento_id']);
-		}
-		$this->db->order_by('c.status', 'ASC');
-		$this->db->order_by('c.data_confirmacao', 'DESC');
-		$dados['contas'] = $this->db->get('tab_conta_corrente_transacao as c')->result();
-=======
         $config['total_rows'] = $this->compensacao->getTotalRows();
 
         $this->pagination->initialize($config);
@@ -426,7 +411,6 @@ class Menu extends CI_Controller
         $this->load->view('includes/top_menu');
 
         $this->load->view('admin/compensacao', $dados);
->>>>>>> 733efb9bba6647a5c8f0ac0244103d525cac6847
 
         $this->load->view('includes/footer');
     }

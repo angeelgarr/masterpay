@@ -139,39 +139,6 @@ $detect = new Mobile_Detect;
                                   <?= $item->status == 1 ? '<i class="fa fa-thumbs-up"></i>' : '<i class="fa fa-thumbs-down"></i>'; ?>
                               <?php } ?>
                               </span>
-<<<<<<< HEAD
-                            </td>
-                            <?php if(!$detect->isMobile()) { ?>
-                            <?php if ($item->status==0) { ?>
-                              <td style="text-align: center;">
-                             
-                              <?php if($this->session->userdata('usuario_logado')['perfil'] !='CLIENTE') { ?>
-                                <a href="<?= base_url('compensacao/confirmar/'.$item->id);?>" onclick="return confirm('Deseja realmente confirmar o pagamento do item selecionado?');">
-                                  <span class="label label-primary">CONFIRMAR</span>
-                                </a>
-                              <?php } ?>
-
-                                 <a href="#" id="<?= $item->id ?>" onclick="showModal(<?= $item->id ?>);">
-                                  <span class="label label-warning">DETALHAR</span>
-                                </a>
-                                
-                              </td>
-                            <?php } else { ?>
-                              <td style="text-align: center;">
-                              <a href="#" id="<?= $item->id ?>" onclick="showModal(<?= $item->id ?>);">
-                                  <span class="label label-warning">DETALHAR</span>
-                                </a>
-                              </td>
-                            <?php } ?>
-                            <?php } ?> 
-
-                          </tr>
-                        <?php } ?>
-
-                      </tbody>
-                    </table>
-                  </div>
-=======
                                         </td>
                                         <?php if (!$detect->isMobile()) { ?>
                                             <?php if ($item->status == 0) { ?>
@@ -207,7 +174,6 @@ $detect = new Mobile_Detect;
                             <?php echo $pagination ?>
                         </ul>
                     </div>
->>>>>>> 733efb9bba6647a5c8f0ac0244103d525cac6847
                 </div>
             </div>
         </div>

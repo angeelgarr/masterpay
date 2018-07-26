@@ -6,8 +6,6 @@ class Login extends CI_Controller {
 	public function index() {
 		if($this->session_verifier()) {
 			redirect('dashboard');
-		} else {
-			$this->load->view('login');
 		}
 	}
 

@@ -51,13 +51,7 @@
 <body class="text-center">
 <div class="content_login">
     <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12 pull-right">
-            <div class="content_site text-left">
-                <a class="btn btn-default btn-lg" href="//www.maxpay.com.br"> Ir para o site </a>
-            </div>
-        </div>
-
-        <div class="col-md-6 col-sm-6 col-xs-12 pull-left" style="padding: 30px;">
+        <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 30px;">
             <form method="post" class="form-signin" action="<?= base_url(); ?>login/autenticar">
                 <img src="<?= base_url(); ?>assets/images/maxpay_logo-02.png" alt="" width="320">
                 <h1 class="font-weight-normal">Controle de Acesso</h1>
@@ -94,6 +88,13 @@
             </form>
         </div>
 
+        <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="content_site text-left">
+                <img src="<?= base_url(); ?>assets/images/maxpay_logo-white.png" alt="" width="232" height="65">
+                <p>A melhor máquina de cartão, gestão do seu negócio, relatório em tempo real.</p>
+                <a class="btn btn-default btn-lg" href="//www.maxpay.com.br"> Ir para o site </a>
+            </div>
+        </div>
     </div>
 </div>
 </body>

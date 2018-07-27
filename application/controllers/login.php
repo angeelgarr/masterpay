@@ -4,9 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends CI_Controller {
 
 	public function index() {
-		if($this->session_verifier()) {
-			redirect('dashboard');
-		}
+        if($this->session_verifier()) {
+            redirect('dashboard');
+        } else {
+            $this->load->view('login');
+        }
+
 	}
 
 	public function autenticar() {
@@ -67,8 +70,10 @@ class Login extends CI_Controller {
 	}
 
 	public function session_verifier() {
-		if($this->session->userdata('usuario_logado')==false) {
-			$this->load->view('login');
-		}
+        if($this->session->userdata('usuario_logado')==false) {
+            return false;
+        } else {
+            return true;
+        }
 	}
 }

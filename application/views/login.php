@@ -63,10 +63,10 @@
                         <strong><?= $this->session->flashdata('alerta'); ?></strong>
                     </div>
                 <?php endif; ?>
-                <label for="inputEmail" class="sr-only">Email address</label>
+                <label for="inputEmail" class="sr-only">Seu E-mail</label>
                 <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Seu E-mail" required
                        autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
+                <label for="inputPassword" class="sr-only">Sua senha</label>
                 <input type="password" id="inputPassword" class="form-control" name="senha" placeholder="Sua senha"
                        required>
                 <div class="remember-password">

@@ -57,7 +57,6 @@ class Login extends CI_Controller {
 	}
 
 	public function alterar_senha() {
-		$this->session_verifier();
 		$this->load->view('alterar_senha');
 	}
 

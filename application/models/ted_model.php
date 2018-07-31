@@ -8,9 +8,21 @@ class Ted_model extends CI_Model {
 		$this->db->select('tcc.total_geral as valor,tcc.status, tte.comercial_name, tte.national_id, tb.codigo, tb.agencia, tb.conta, tb.tipo_conta');
 		$this->db->where('tcc.estabelecimento_id = tte.id');
 		$this->db->where('tb.estabelecimento_id=tte.id');
-		$this->db->where('date_format(tcc.dia_repasse,'."'%Y%m%d'".') = date_format(CURRENT_DATE,'."'%Y%m%d'".')');
+		$this->db->where('tcc.status','0');
 		$this->db->order_by('valor','DESC');
-		return $this->db->get('tab_conta_corrente_transacao as tcc,tab_estabelecimento as tte, tab_banco as tb')->result();
+		$query1 = $this->db->get('tab_conta_corrente_transacao as tcc,tab_estabelecimento as tte, tab_banco as tb')->result();
+
+
+		$this->db->select('tcc.total_geral as valor,tcc.status, tte.comercial_name, tte.national_id, tb.codigo, tb.agencia, tb.conta, tb.tipo_conta');
+		$this->db->where('tcc.estabelecimento_id = tte.id');
+		$this->db->where('tb.estabelecimento_id=tte.id');
+		$this->db->where('date_format(tcc.data_confirmacao,'."'%Y%m%d'".') = date_format(CURRENT_DATE,'."'%Y%m%d'".')');
+		$this->db->order_by('valor','DESC');
+		$query2 = $this->db->get('tab_conta_corrente_transacao as tcc,tab_estabelecimento as tte, tab_banco as tb')->result();			
+
+		$query = array_merge($query1,$query2);
+
+		return $query;
 
 	}
 

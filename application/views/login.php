@@ -71,7 +71,7 @@
                        required>
                 <div class="remember-password">
                     <p class="change_link">Esqueceu a senha?
-                        <strong><a href=""> Clique aqui! </a></strong>
+                        <strong><a href="<?= base_url(); ?>login/recuperar_senha"> Clique aqui! </a></strong>
                     </p>
                 </div>
 

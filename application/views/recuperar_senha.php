@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Controle de Acesso | Alterar Senha</title>
+    <title>Controle de Acesso | Recuperar Senha</title>
 
     <!-- Bootstrap -->
     <link href="<?= base_url(); ?>assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -52,9 +52,9 @@
 <div class="content_login">
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 30px;">
-            <form method="post" class="form-signin" action="<?= base_url(); ?>login/confirmar_senha">
-                <img src="<?= base_url(); ?>assets/images/maxpay_logo-02.png" alt="" width="320">
-                <h1 class="font-weight-normal">Alterar Senha</h1>
+            <form method="post" class="form-signin" action="<?= base_url(); ?>login/nova_senha">
+                    <img src="<?= base_url(); ?>assets/images/maxpay_logo-02.png" alt="" width="320">
+                <h1 class="font-weight-normal">Recuperar Senha</h1>
                 <?php if ($error = $this->session->flashdata('alerta')): ?>
                     <div class="alert alert-danger alert-dismissible fade in" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
@@ -64,17 +64,17 @@
                     </div>
                 <?php endif; ?>
                 <label for="inputEmail" class="sr-only">Seu E-mail</label>
-                <input type="email" id="inputEmail" class="form-control" name="email"
-                       value="<?= $this->session->userdata('usuario_logado')['email'] ?>" disabled="true"/>
-                <label for="inputPassword" class="sr-only">Sua senha</label>
-                <input type="password" id="inputPassword" class="form-control" name="senha-nova" placeholder="Sua senha"
-                       required/>
-                <label for="inputPasswordRepeat" class="sr-only">Repetir senha</label>
-                <input type="password" id="inputPasswordRepeat" class="form-control" name="senha-nova-repete"
-                       placeholder="Repetir Senha" required/>
+                <input style="margin-bottom: 20px" type="email" id="inputEmail" class="form-control" name="email" placeholder="Seu E-mail" required
+                       autofocus>
+
+<!--                <div class="remember-password">-->
+<!--                    <p class="change_link">Esqueceu a senha?-->
+<!--                        <strong><a href="--><?//= base_url(); ?><!--/login/recuperar_senha"> Clique aqui! </a></strong>-->
+<!--                    </p>-->
+<!--                </div>-->
 
                 <div class="col-md-6 col-sm-6 col-xs-8 col-md-offset-3 col-sm-offset-3 col-xs-offset-2">
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
                 </div>
 
                 <div class="clearfix"></div>

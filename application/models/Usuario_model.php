@@ -9,5 +9,21 @@ class Usuario_model extends CI_Model {
         $usuario = $this->db->get("tab_usuario")->row_array();
         return $usuario;
     }
-	
+
+    public function buscaPorEmail($email){
+        $this->db->where("email", $email);
+        $usuario = $this->db->get("tab_usuario")->row_array();
+        return $usuario;
+    }
+
+    public function atualizarPorEmail($email, $senhatemp){
+        $this->db->where("email", $email);
+        $dados['senha'] = md5($senhatemp);
+        $dados['senha_temporaria'] = 1;
+
+        if (!$this->db->update('tab_usuario', $dados)) {
+            $this->session->set_flashdata('alerta', 'Ocorreu um erro ao tentar atualizar a senha!');
+            redirect('login');
+        }
+    }
 }

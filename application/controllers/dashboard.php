@@ -84,6 +84,7 @@ class Dashboard extends CI_Controller {
 		$data['ticket_medio']				= $this->admin_model->calcula_ticket_medio()['ticket'];
 		$data['total_liquido_lucro'] 		= $this->dashboard_model->total_liquido_lucro()['total_liquido_lucro'];
 		$data['vendas_por_periodo']			= $this->admin_model->vendas_por_periodo();
+        $data['transacoes_por_dia']		    = $this->admin_model->transacoes_por_dia();
 		$data['maiores_lucros']				= $this->admin_model->maiores_lucros();
 		$data['maiores_estabelecimento']	= $this->admin_model->maiores_estabelecimento();
 		$data['lucros_por_mes']				= $this->admin_model->lucros_por_mes();

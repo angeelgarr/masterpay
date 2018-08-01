@@ -62,6 +62,13 @@
                         </button>
                         <strong><?= $this->session->flashdata('alerta'); ?></strong>
                     </div>
+                <?php elseif($error = $this->session->flashdata('sucesso')): ?>
+                    <div class="alert alert-success alert-dismissible fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                    aria-hidden="true">×</span>
+                        </button>
+                        <strong><?= $this->session->flashdata('sucesso'); ?></strong>
+                    </div>
                 <?php endif; ?>
                 <label for="inputEmail" class="sr-only">Seu E-mail</label>
                 <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Seu E-mail" required

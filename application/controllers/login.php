@@ -132,7 +132,7 @@ class Login extends CI_Controller {
 
         if($this->email->send())
         {
-            $this->session->set_flashdata('alerta','Email enviado com sucesso!');
+            $this->session->set_flashdata('sucesso','Email enviado com sucesso!');
             redirect('login');
         }
         else

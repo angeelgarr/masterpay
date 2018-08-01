@@ -71,7 +71,11 @@
 
                 <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:600px;">
                     <tr>
-                        <td align="center" style="font-size:14px;color:#878787;padding:40px 0 10px;">
+                        <td align="center" style="font-size:12px;color:#878787;padding:40px 40px 0;">
+                            Não responda a este email, pois esta é uma mensagem automática. Se precisar de ajuda ou quiser entrar em contato conosco, acesse os links abaixo.</td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="font-size:14px;color:#878787;padding:20px 0 10px;">
                             <a href="//www.maxpay.com.br">www.maxpay.com.br</a>
                         </td>
                     </tr>

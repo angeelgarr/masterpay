@@ -112,16 +112,16 @@ $detect = new Mobile_Detect;
         $.ajax({
             url: url,
             beforeSend: function () {
-                $(".modal-content").hide();
-                $(".modal-load").show();
+                $("#modal .modal-content").hide();
+                $("#modal .modal-load").show();
             },
             success: function (data) {
-                $(".modal-content").html(data);
-                $(".modal-load").hide();
-                $(".modal-content").show();
+                $("#modal .modal-content").html(data);
+                $("#modal .modal-load").hide();
+                $("#modal .modal-content").show();
             },
             error: function () {
-                $(".modal-load-content").html("<i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw'></i><h4>Ocorreu um erro ao tentar processar a requisição. Por favor, tente novamente!</h4>").css("padding", "50px");
+                $("#modal .modal-load-content").html("<i class='fa fa-circle-o-notch fa-spin fa-3x fa-fw'></i><h4>Ocorreu um erro ao tentar processar a requisição. Por favor, tente novamente!</h4>").css("padding", "50px");
             }
         });
     }

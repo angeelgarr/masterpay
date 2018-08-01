@@ -28,7 +28,6 @@ class Admin_model extends CI_Model {
 		return $this->db->get('tab_transacao_processada ttp, tab_estabelecimento te')->result();
 	}
 
-	
 	public function vendas_por_periodo() {
 		$this->db->select('DATE_FORMAT(ttr.data_transacao,'."'%m/%Y'".') as periodo_ref,tte.comercial_name,sum(ttr.valor_transacao) as valor_bruto,COALESCE(sum(ttr.lucro_masterpay),0)+COALESCE( sum(ttr.lucro_antecipacao),0) as valor_lucro');
 		$this->db->where('ttr.estabelecimento_id=tte.id');
@@ -36,6 +35,14 @@ class Admin_model extends CI_Model {
 		$this->db->order_by('periodo_ref desc, valor_bruto desc');
 		return $this->db->get('tab_transacao_repasse ttr, tab_estabelecimento tte ')->result();
 	}
+
+    public function transacoes_por_dia() {
+        $this->db->select('DATE_FORMAT(tr.data_transacao,'."'%m/%Y'".') as periodo, sum(tr.valor_transacao) total_vendas, sum(lucro_masterpay) as lucro_taxas, COALESCE(sum(lucro_antecipacao),0) as lucro_antecipacao');
+        $this->db->group_by('periodo');
+        $this->db->order_by('periodo asc');
+        $this->db->limit(10);
+        return $this->db->get('tab_transacao_repasse tr')->result();
+    }
 
 	public function lucro_antecipacao_por_periodo() {
 		$this->db->select('DATE_FORMAT(ttr.data_transacao,'."'%m/%Y'".') as periodo_ref,tte.comercial_name,sum(ttr.valor_transacao) as valor_bruto, sum(ttr.lucro_antecipacao) as valor_lucro');

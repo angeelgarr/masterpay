@@ -105,8 +105,8 @@ class Login extends CI_Controller {
         // Configuração para o envio do email
         $config['smtp_host'] = 'ssl://smtp.gmail.com';
         $config['smtp_port'] = 465;
-        $config['smtp_user'] = 'email';
-        $config['smtp_pass'] = 'password';
+        $config['smtp_user'] = 'maxpay.noreply@gmail.com';
+        $config['smtp_pass'] = 'y99z15@7*X';
         $config['protocol']  = 'smtp';
         $config['validate'] = TRUE;
         $config['wordwrap'] = TRUE;
@@ -117,7 +117,7 @@ class Login extends CI_Controller {
         // Library Email, com os parâmetros de configuração
         $this->email->initialize($config);
 
-        $this->email->from('contato@maxpay.com.br', 'Remetente'); // Remetente
+        $this->email->from('maxpay.noreply@gmail.com', 'Maxpay'); // Remetente
         $this->email->to($email, $nome); // Destinatário
 
         // Assunto do email

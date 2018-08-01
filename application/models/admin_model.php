@@ -65,7 +65,9 @@ class Admin_model extends CI_Model {
 	
 	public function lucros_total_aluguel() {
 		$this->db->select('SUM(tce.valor*tce.quantidade) as valor');
-		return $this->db->get('tab_controle_aluguel_equipamento tce')->row_array();
+		$this->db->where('te.id=tce.estabelecimento_id');
+		$this->db->where('te.status','1');
+		return $this->db->get('tab_controle_aluguel_equipamento tce, tab_estabelecimento te')->row_array();
 	}
 
 	public function total_vendas_dia() {

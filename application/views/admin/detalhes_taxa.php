@@ -11,25 +11,25 @@
 <div class="col-md-4 col-sm-4 col-xs-12 form-group">
     <label for="conta">Taxa Débito Stone* :</label>
     <input type="text" id="conta" class="form-control" name="taxa_debito_stone"
-           data-parsley-trigger="change" value="<?= $taxa["taxa_debito_stone"]; ?>" required/>
+           data-parsley-trigger="change" value="<?= $taxa["taxa_debito_stone"]; ?>" readonly/>
 </div>
 
 <div class="col-md-4 col-sm-4 col-xs-12 form-group">
     <label for="conta">Taxa Crédito à vista Stone* :</label>
     <input type="text" id="conta" class="form-control" name="taxa_credito_avista_stone"
-           data-parsley-trigger="change" value="<?= $taxa["taxa_credito_avista_stone"]; ?>" required/>
+           data-parsley-trigger="change" value="<?= $taxa["taxa_credito_avista_stone"]; ?>" readonly/>
 </div>
 
 <div class="col-md-4 col-sm-4 col-xs-12 form-group">
     <label for="conta">Taxa Crédito Stone(2x-6x)* :</label>
     <input type="text" id="conta" class="form-control" name="taxa_credito26stone"
-           data-parsley-trigger="change" value="<?= $taxa["taxa_credito26stone"]; ?>" required/>
+           data-parsley-trigger="change" value="<?= $taxa["taxa_credito26stone"]; ?>" readonly/>
 </div>
 
 <div class="col-md-4 col-sm-4 col-xs-12 form-group">
     <label for="conta">Taxa Crédito Stone(7x-12x)* :</label>
     <input type="text" id="conta" class="form-control" name="taxa_credito712stone"
-           data-parsley-trigger="change" value="<?= $taxa["taxa_credito712stone"]; ?>" required/>
+           data-parsley-trigger="change" value="<?= $taxa["taxa_credito712stone"]; ?>" readonly/>
 </div>
 
 <div class="clearfix"></div>

@@ -51,10 +51,9 @@ class Taxa extends CI_Controller {
 
     public function edit() {
         $this->session_verifier();
-        $id = $this->input->get("id");
 
         $this->load->model("taxa_model", "taxa");
-        $this->taxa->atualizarPorId($id);
+        $this->taxa->atualizarPorIdEstabelecimento();
     }
 
 	public function session_verifier() {

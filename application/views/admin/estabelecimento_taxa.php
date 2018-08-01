@@ -1,4 +1,4 @@
-<form id="formEdit" method="post" action=""
+<form id="formEdit" method="post" action="<?= base_url() ?>taxa/edit"
       data-parsley-validate>
     <?php if ($error = $this->session->flashdata('alerta')): ?>
         <div class="alert alert-info alert-dismissible fade in" role="alert">
@@ -25,9 +25,11 @@
         <select id="bandeira" name="bandeira" class="form-control" readonly>
             <option value="">Selecionar bandeira...</option>
             <?php foreach ($taxa as $item): ?>
-                <option value="<?= $item->estabelecimento_parametro_id; ?>">
-                    <?= $item->bandeira; ?>
-                </option>
+                <?php if(!is_null($item->bandeira)) { ?>
+                    <option value="<?= $item->estabelecimento_parametro_id; ?>">
+                        <?= $item->bandeira; ?>
+                    </option>
+                <?php } ?>
             <?php endforeach; ?>
         </select>
     </div>
@@ -63,7 +65,7 @@
             $("#btnSave").hide();
 
             var id = $(this).val();
-            $("#formEdit").attr("action", ""+base_url+"taxa/edit?id=" + id);
+//            $("#formEdit").attr("action", ""+base_url+"taxa/edit?id=" + id);
             if (id) {
                 var url = base_url + "taxa/view?id=" + id;
                 showTaxas(url);

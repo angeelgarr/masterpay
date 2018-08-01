@@ -37,37 +37,26 @@ class Taxa_model extends CI_Model
         return $dados;
     }
 
-    public function atualizarPorId($id)
+    public function atualizarPorIdEstabelecimento()
     {
-//        $this->db->where('id', $id);
         $bandeira = $this->input->post('bandeira');
         $idestabelecimento = $this->input->post('estabelecimento_id');
 
-        $this->db->where('bandeira', $bandeira);
-        switch ($bandeira) {
-            case "VISA":
-                $this->db->or_where('bandeira', 'MASTERCARD');
-                break;
-            case "MASTERCARD":
-                $this->db->or_where('bandeira', 'VISA');
-                break;
-            case "ELO":
-                $this->db->or_where('bandeira', 'HIPERCARD');
-                break;
-            case "HIPERCARD":
-                $this->db->or_where('bandeira', 'ELO');
-                break;
+        if($bandeira == 'VISA' || $bandeira == 'MASTERCARD') {
+            $this->db->where_in('bandeira', ['VISA', 'MASTERCARD']);
+        } elseif($bandeira == 'ELO' || $bandeira == 'HIPERCARD') {
+            $this->db->where_in('bandeira', ['ELO', 'HIPERCARD']);
         }
         $this->db->where('estabelecimento_id', $idestabelecimento);
 
         $dados['taxa_credito26masterpay'] = $this->input->post('taxa_credito26masterpay');
-        $dados['taxa_credito26stone'] = $this->input->post('taxa_credito26stone');
+//        $dados['taxa_credito26stone'] = $this->input->post('taxa_credito26stone');
         $dados['taxa_credito712masterpay'] = $this->input->post('taxa_credito712masterpay');
-        $dados['taxa_credito712stone'] = $this->input->post('taxa_credito712stone');
+//        $dados['taxa_credito712stone'] = $this->input->post('taxa_credito712stone');
         $dados['taxa_credito_avista_masterpay'] = $this->input->post('taxa_credito_avista_masterpay');
-        $dados['taxa_credito_avista_stone'] = $this->input->post('taxa_credito_avista_stone');
+//        $dados['taxa_credito_avista_stone'] = $this->input->post('taxa_credito_avista_stone');
         $dados['taxa_debito_masterpay'] = $this->input->post('taxa_debito_masterpay');
-        $dados['taxa_debito_stone'] = $this->input->post('taxa_debito_stone');
+//        $dados['taxa_debito_stone'] = $this->input->post('taxa_debito_stone');
 
         if ($this->db->update('tab_estabelecimento_parametro', $dados)) {
             $this->session->set_flashdata('alerta', 'Taxas atualizadas com sucesso!');

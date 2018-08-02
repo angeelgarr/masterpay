@@ -127,7 +127,7 @@
                         <span class="count_top"><i class="fa fa-calendar"></i> Julho</span>
                     <?php } ?>
 
-                    <?php if ($item->mes == 'Agust') { ?>
+                    <?php if ($item->mes == 'August') { ?>
                         <span class="count_top"><i class="fa fa-calendar"></i> Agosto</span>
                     <?php } ?>
 

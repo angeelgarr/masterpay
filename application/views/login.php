@@ -53,7 +53,7 @@
     <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-12" style="padding: 30px;">
             <form method="post" class="form-signin" action="<?= base_url(); ?>login/autenticar">
-                <img src="<?= base_url(); ?>assets/images/maxpay_logo-02.png" alt="" width="320">
+                <img src="<?= base_url(); ?>assets/images/maxpay_logo.png" alt="" width="256" style="margin: 30px;">
                 <h1 class="font-weight-normal">Controle de Acesso</h1>
                 <?php if ($error = $this->session->flashdata('alerta')): ?>
                     <div class="alert alert-danger alert-dismissible fade in" role="alert">

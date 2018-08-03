@@ -163,14 +163,6 @@
     </div>
 </form>
 
-<style>
-    .btn-group-toggle.form-control {
-        border: 0 none;
-        box-shadow: none;
-        padding: 0;
-    }
-</style>
-
 <script type="text/javascript">
     $(document).ready(function () {
         if ($("input.flat")[0]) {

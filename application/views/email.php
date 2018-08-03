@@ -19,7 +19,7 @@
                     <tr>
                         <td>
                             <a href="https://www.maxpay.com.br/" target="_blank">
-                                <img src="https://www.maxpay.com.br/wp-content/uploads/2018/06/maxpay_logo-02.png" border="0"
+                                <img src="<?= base_url(); ?>assets/images/maxpay_logo.png" border="0"
                                      style="image-rendering:pixelated;width:180px;" alt="Maxpay" title="Maxpay">
                             </a>
                         </td>

@@ -9,6 +9,16 @@ class Estabelecimentos_model extends CI_Model
         ))->row_array();
     }
 
+    public function buscarEstabelecimentos()
+    {
+        $this->db->select('id, comercial_name, company_name');
+        $this->db->from('tab_estabelecimento');
+
+        $dados = $this->db->get()->result();
+
+        return $dados;
+    }
+
 
     public function atualizarPorId($id)
     {

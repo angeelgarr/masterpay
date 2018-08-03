@@ -39,26 +39,24 @@
                                 </tr>
                                 <tr>
                                     <td style="font-size:14px;color:#757575;padding-top:10px;padding-bottom:10px;">
-                                        Você está recebendo este email porque solicitou a recuperação de sua senha de acesso
-                                        ao portal Maxpay.
+                                        Você está recebendo este email para ter acesso ao portal Maxpay.
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="font-size:14px;color:#757575;padding-top:10px;padding-bottom:10px;">
-                                        Esta é sua nova senha temporária: <strong><?= $senhatemp; ?></strong>
+                                        Esta é sua senha temporária: <strong><?= $senhatemp; ?></strong>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="font-size:14px;color:#757575;padding-top:10px;padding-bottom:10px;">
-                                        Acesse o link abaixo informando sua senha temporária e siga os passos para
+                                        Acesse o link abaixo informando seu email e a senha temporária e siga os passos para
                                         concluir o processo.
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="center">
                                         <a href="<?= base_url(); ?>login "
-                                           style="background:#1b75bc;border-radius:4px;color:#fff;display:inline-block;font-size:14px;font-weight:300;line-height:40px;text-align:center;text-decoration:none;width:160px;text-transform:uppercase;">Redefinir
-                                            senha</a>
+                                           style="background:#1b75bc;border-radius:4px;color:#fff;display:inline-block;font-size:14px;font-weight:300;line-height:40px;text-align:center;text-decoration:none;width:160px;text-transform:uppercase;">Primeiro acesso</a>
                                     </td>
                                 </tr>
                                 <tr style="height: 10px;"></tr>
@@ -108,7 +106,7 @@
                                 <tr>
                                     <td align="center" style="padding: 10px 0; font-size: 14px;">
                                         <p>&copy; 2018 Todos os Direitos Reservado. Maxpay! Sua forma de pagamento
-                                            inteligente</p>
+                                            inteligente.</p>
                                     </td>
                                 </tr>
                                 </tbody>

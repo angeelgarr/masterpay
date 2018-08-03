@@ -4,11 +4,11 @@
         <h3>MENU GERAL</h3>
         <ul class="nav side-menu">
 
-
-            <li><a href="<?= base_url(); ?>dashboard"><i class="fa fa-bar-chart-o"></i> Dashboard</a>
+            <li><a href="<?= base_url(); ?>dashboard"><i class="fa fa-bar-chart-o"></i> Dashboard <span
+                            class="fa fa-chevron-down"></span></a>
             </li>
 
-            <?php if($this->session->userdata('usuario_logado')['perfil'] ==  'ADMINISTRADOR'): ?>
+            <?php if ($this->session->userdata('usuario_logado')['perfil'] == 'ADMINISTRADOR'): ?>
                 <li><a><i class="fa fa-user"></i> Usuários <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url(); ?>usuario">Consultar</a></li>
@@ -17,18 +17,21 @@
                 </li>
             <?php endif; ?>
 
-            <?php if ($this->session->userdata('usuario_logado')['perfil'] != 'CLIENTE') { ?>
+            <?php if ($this->session->userdata('usuario_logado')['perfil'] == 'ADMINISTRADOR'
+                || $this->session->userdata('usuario_logado')['perfil'] == 'GESTOR'
+            ) { ?>
+
                 <li><a><i class="fa fa-users"></i> Administrativo <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="<?= base_url(); ?>dashboard/teds">Controle de TED's</a></li>
-                        <li><a href="<?= base_url(); ?>dashboard/admin">Dashboard Admin</a></li>
-                        <li><a href="<?= base_url(); ?>demonstrativo">Demonstrativo Antecipação</a></li>
-                        <li><a href="<?= base_url(); ?>dashboard/graficos">Gráficos</a></li>
+                        <li><a href="<?= base_url() ?>dashboard/admin">Dashboard Admin</a></li>
+                        <li><a href="<?= base_url() ?>demonstrativo">Demonstrativo Antecipação</a></li>
+                        <li><a href="<?= base_url() ?>dashboard/graficos">Gráficos</a></li>
                     </ul>
                 </li>
             <?php } ?>
 
-            <?php if ($this->session->userdata('usuario_logado')['perfil'] != 'CLIENTE') { ?>
+            <?php if ($this->session->userdata('usuario_logado')['perfil'] == 'ADMINISTRADOR') { ?>
             <li><a><i class="fa fa-bank"></i> Estabelecimento <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <!-- <li><a href="<?= base_url() ?>estabelecimento">Incluir Loja</a></li> -->
@@ -37,28 +40,39 @@
                 </ul>
                 <?php } ?>
 
+                <?php if ($this->session->userdata('usuario_logado')['perfil'] != 'GESTOR') { ?>
             <li><a><i class="fa fa-shopping-cart"></i> Vendas <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <!-- <li><a href="index.html">Dashboard</a></li> -->
                     <li><a href="<?= base_url(); ?>menu/transacoes">Consultar Transações</a></li>
                 </ul>
             </li>
-            <li><a><i class="fa fa-usd"></i> Pagamentos <span class="fa fa-chevron-down"></span></a>
-                <ul class="nav child_menu">
-                    <li><a href="<?= base_url(); ?>menu/repasses">Consultar Repasses</a></li>
-                    <li><a href="<?= base_url(); ?>menu/compensacao">Consultar Pagamentos</a></li>
-                    <!-- <li><a href="form_advanced.html">Dashboard</a></li> -->
-                </ul>
-            </li>
+        <?php } ?>
+
+            <?php if ($this->session->userdata('usuario_logado')['perfil'] == 'CLIENTE'
+                || $this->session->userdata('usuario_logado')['perfil'] == 'ADMINISTRADOR'
+            ) { ?>
+                <li><a><i class="fa fa-usd"></i> Pagamentos <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                        <li><a href="<?= base_url(); ?>menu/repasses">Consultar Repasses</a></li>
+
+                        <?php if ($this->session->userdata('usuario_logado')['perfil'] == 'ADMINISTRADOR') { ?>
+                            <li><a href="<?= base_url(); ?>menu/compensacao">Consultar Pagamentos</a></li>
+                        <?php } ?>
+                        <!-- <li><a href="form_advanced.html">Dashboard</a></li> -->
+                    </ul>
+                </li>
+            <?php } ?>
+
             <!-- <?php if ($this->session->userdata('usuario_logado')['perfil'] == 'CLIENTE') { ?>
                   <li><a><i class="fa fa-refresh"></i> Antecipação <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a a href="<?= base_url(); ?>antecipacao">Solicitar</a></li>
                        <li><a href="#">Antecipação Automática</a></li>
-                      <li><a href="typography.html">Administrativo</a></li> 
-                       
+                      <li><a href="typography.html">Administrativo</a></li>
+
                     </ul>
-                  </li> 
+                  </li>
                   <?php } ?> -->
             <?php if ($this->session->userdata('usuario_logado')['perfil'] == 'CLIENTE') { ?>
                 <li><a><i class="fa fa-pencil-square-o"></i> Contratos <span class="fa fa-chevron-down"></span></a>
@@ -113,5 +127,3 @@
 <!-- /menu footer buttons -->
 </div>
 </div>
-
-        

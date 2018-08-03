@@ -22,19 +22,10 @@ class Usuario_model extends CI_Model {
         $usuario['senha_temporaria']   = 1;
         $usuario['status']             = $this->input->post("status") == "true" ? true : false;
 
-        if($this->buscaPorEmail($this->input->post("email"))){
-            $this->session->set_flashdata('alerta', 'Já existe usuário cadastrado com esse email!');
-            redirect('usuario');
+        if ($this->db->insert('tab_usuario',$usuario)) {
+            return true;
         } else {
-            if ($this->db->insert('tab_usuario',$usuario)) {
-                $this->session->set_flashdata('alerta', 'Usário cadastrado com sucesso!');
-                return true;
-                redirect('usuario');
-            } else {
-                $this->session->set_flashdata('alerta', 'Ocorreu um erro ao tentar cadastrar usário!');
-                return false;
-                redirect('usuario');
-            }
+            return false;
         }
     }
 

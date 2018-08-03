@@ -40,16 +40,16 @@ $detect = new Mobile_Detect;
 
                     <div class="x_content">
                         <?php if ($error = $this->session->flashdata('alerta')): ?>
-                            <div class="alert alert-info alert-dismissible fade in" role="alert">
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">×</span>
+                                            aria-hidden="true">×</span>
                                 </button>
                                 <strong><?= $this->session->flashdata('alerta'); ?></strong>
                             </div>
                         <?php elseif ($error = $this->session->flashdata('sucesso')): ?>
                             <div class="alert alert-success alert-dismissible fade in" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                        aria-hidden="true">×</span>
+                                            aria-hidden="true">×</span>
                                 </button>
                                 <strong><?= $this->session->flashdata('sucesso'); ?></strong>
                             </div>

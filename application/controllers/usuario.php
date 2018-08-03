@@ -63,13 +63,7 @@ class Usuario extends CI_Controller {
 
         $this->email->message($this->load->view('email_novocadastro', $dados, TRUE));
 
-        if($this->email->send())
-        {
-            $this->session->set_flashdata('sucesso','Email enviado com sucesso!');
-            redirect('usuario');
-        }
-        else
-        {
+        if(!$this->email->send()) {
 //            $this->session->set_flashdata('error',$this->email->print_debugger());
             $this->session->set_flashdata('alerta','Erro ao enviar email com senha temporária!');
             redirect('usuario');
@@ -81,16 +75,21 @@ class Usuario extends CI_Controller {
         $this->session_verifier();
 
         if($this->input->post()) {
-            $this->session_verifier();
+            $this->load->model('usuario_model', 'usuario');
 
-            $senhatemp = $this->gerar_senha_temp();
-
-            $this->load->model('usuario_model', 'usuarios');
-
-            $usuario = $this->usuarios->cadastrarUsuario($senhatemp);
-
-            if($usuario) {
-                $this->enviar_email($this->input->post("nome"), $this->input->post("email"), $senhatemp);
+            if($this->usuario->buscaPorEmail($this->input->post("email"))){
+                $this->session->set_flashdata('alerta', 'Já existe usuário cadastrado com este email!');
+                redirect('usuario/novo');
+            } else {
+                $senhatemp = $this->gerar_senha_temp();
+                if($this->usuario->cadastrarUsuario($senhatemp)) {
+                    $this->enviar_email($this->input->post("nome"), $this->input->post("email"), $senhatemp);
+                    $this->session->set_flashdata('sucesso', 'Usário cadastrado com sucesso!');
+                    redirect('usuario');
+                } else {
+                    $this->session->set_flashdata('alerta', 'Ocorreu um erro ao tentar cadastrar usário!');
+                    redirect('usuario');
+                }
             }
         } else {
             $this->load->model('estabelecimentos_model', 'estabelecimentos');
@@ -111,10 +110,19 @@ class Usuario extends CI_Controller {
     public function editar($id)
     {
         $this->session_verifier();
+        $this->load->library('user_agent');
 
         if($this->input->post()) {
             $this->load->model('usuario_model', 'usuario');
-            $this->usuario->editarUsuarioPorId($id);
+
+            $usuario = $this->usuario->buscaPorEmail($this->input->post("email"));
+
+            if($id != $usuario["id"] && $this->input->post("email") == $usuario["email"]){
+                $this->session->set_flashdata('alerta', 'Já existe usuário cadastrado com este email!');
+                redirect($this->agent->referrer());
+            } else {
+                $this->usuario->editarUsuarioPorId($id);
+            }
         } else {
             $this->load->model('usuario_model', 'usuario');
             $usuario = $this->usuario->buscarUsuarioPorId($id);

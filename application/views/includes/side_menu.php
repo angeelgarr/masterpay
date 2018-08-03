@@ -4,8 +4,7 @@
         <h3>MENU GERAL</h3>
         <ul class="nav side-menu">
 
-            <li><a href="<?= base_url(); ?>dashboard"><i class="fa fa-bar-chart-o"></i> Dashboard <span
-                            class="fa fa-chevron-down"></span></a>
+            <li><a href="<?= base_url(); ?>dashboard"><i class="fa fa-bar-chart-o"></i> Dashboard </a>
             </li>
 
             <?php if ($this->session->userdata('usuario_logado')['perfil'] == 'ADMINISTRADOR'): ?>

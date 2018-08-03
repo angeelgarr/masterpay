@@ -39,7 +39,7 @@
                                 </tr>
                                 <tr>
                                     <td style="font-size:14px;color:#757575;padding-top:10px;padding-bottom:10px;">
-                                        Você está recebendo este email para ter acesso ao portal Maxpay.
+                                        Segue abaixo suas credenciais de acesso ao portal MaxPay.
                                     </td>
                                 </tr>
                                 <tr>

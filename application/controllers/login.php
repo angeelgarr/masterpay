@@ -24,6 +24,7 @@ class Login extends CI_Controller {
                 if($usuario['senha_temporaria'] == 1) {
                     redirect('login/alterar_senha');
                 } else {
+					$this->usuario_model->atualizaUltimoAcesso($usuario['id']);
                     redirect('dashboard');
                 }
             } else {

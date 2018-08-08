@@ -2,6 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuario extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        
+        $this->load->model('log_model');
+    }
+
     public function index() {
 //        $this->output->enable_profiler(TRUE);
         $this->session_verifier();
@@ -10,6 +17,13 @@ class Usuario extends CI_Controller {
         $usuarios = $this->usuarios->buscarUsuarios();
 
         $dados = array('usuarios' => $usuarios);
+        // registro de log
+        $usuario = $this->session->userdata('usuario_logado');
+        
+        $this->log_model->registrar_acao($usuario,
+										'USUARIO/CONSULTAR',
+										'SELECT',
+									$usuario['estabelecimento_id']);
 
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');
@@ -84,7 +98,8 @@ class Usuario extends CI_Controller {
                 $senhatemp = $this->gerar_senha_temp();
                 if($this->usuario->cadastrarUsuario($senhatemp)) {
                     $this->enviar_email($this->input->post("nome"), $this->input->post("email"), $senhatemp);
-                    $this->session->set_flashdata('sucesso', 'Usário cadastrado com sucesso!');
+                    $this->session->set_flashdata('sucesso', 'Usuário cadastrado com sucesso!');
+
                     redirect('usuario');
                 } else {
                     $this->session->set_flashdata('alerta', 'Ocorreu um erro ao tentar cadastrar usário!');
@@ -122,6 +137,12 @@ class Usuario extends CI_Controller {
                 redirect($this->agent->referrer());
             } else {
                 $this->usuario->editarUsuarioPorId($id);
+               
+                $user = $this->session->userdata('usuario_logado');
+                $this->log_model->registrar_acao($user,
+										'USUARIO/CONSULTAR/EDITAR',
+										'UPDATE',
+                                        $usuario['estabelecimento_id']);
             }
         } else {
             $this->load->model('usuario_model', 'usuario');

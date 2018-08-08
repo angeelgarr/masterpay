@@ -25,7 +25,7 @@
                         <li><a href="<?= base_url(); ?>dashboard/teds">Controle de TED's</a></li>
                         <li><a href="<?= base_url() ?>dashboard/admin">Dashboard Admin</a></li>
                         <li><a href="<?= base_url() ?>demonstrativo">Demonstrativo Antecipação</a></li>
-                        <li><a href="<?= base_url() ?>dashboard/graficos">Gráficos</a></li>
+                        <!-- <li><a href="<?= base_url() ?>dashboard/graficos">Gráficos</a></li> -->
                     </ul>
                 </li>
             <?php } ?>

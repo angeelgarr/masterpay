@@ -32,8 +32,8 @@ class Usuario_model extends CI_Model {
 
             $user = $this->session->userdata('usuario_logado');
                     $this->log_model->registrar_acao($user,
-                                            'USUARIO/CONSULTAR/EDITAR',
-                                            'UPDATE',
+                                            'USUARIO/CONSULTAR/NOVO',
+                                            'INSERT',
                                             $usuario['estabelecimento_id']);
             return true;
         } else {
@@ -51,6 +51,11 @@ class Usuario_model extends CI_Model {
         $usuario['status']             = $this->input->post("status") == "true" ? true : false;
 
         if ($this->db->update('tab_usuario', $usuario)) {
+            $user = $this->session->userdata('usuario_logado');
+                    $this->log_model->registrar_acao($user,
+                                            'USUARIO/CONSULTAR/EDITAR',
+                                            'UPDATE',
+                                            $usuario['estabelecimento_id']);
             $this->session->set_flashdata('sucesso', 'Usuário atualizado com sucesso!');
             redirect('usuario');
         } else {

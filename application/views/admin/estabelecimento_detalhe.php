@@ -148,7 +148,7 @@
         </div>
     </div>
 
-    <div class="col-md-4 col-sm-4 col-xs-6 form-group">
+    <div class="col-md-2 col-sm-4 col-xs-6 form-group">
         <label for="conta">Status* :</label>
         <div class="btn-group btn-group-toggle form-control" data-toggle="buttons">
             <label class="btn btn-default <?= $estabelecimento["status"] == 1 ? 'active' : ''; ?>">
@@ -160,6 +160,11 @@
                        autocomplete="off" <?= $estabelecimento["status"] == 0 ? 'checked' : ''; ?> /> Inativo
             </label>
         </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-6 form-group">
+        <label for="conta">Faturamento* :</label>
+        <input type="text" id="conta" class="form-control" name="faturamento"
+               data-parsley-trigger="change" value="<?= $estabelecimento["faturamento"]; ?>"/>
     </div>
 </form>
 

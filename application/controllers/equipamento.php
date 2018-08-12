@@ -120,11 +120,6 @@ class Equipamento extends CI_Controller {
         $this->load->model("equipamento_model", "equipamento");
        
         $usuario = $this->session->userdata('usuario_logado');
-
-        $this->log_model->registrar_acao($usuario,
-										'ESTABELECIMENTO/CONSULTAR/DETALHAR/EQUIPAMENTO/SALVAR EQUIPAMENTO',
-										'INSERT',
-                                    $id);
                                     
         $this->equipamento->inserir();
     }

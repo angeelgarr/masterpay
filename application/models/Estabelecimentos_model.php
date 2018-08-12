@@ -42,6 +42,7 @@ class Estabelecimentos_model extends CI_Model
         $dados['idm'] = $this->input->post('idm');
         $dados['antecipa'] = $this->input->post('antecipa') == "true" ? true : false;
         $dados['taxa_antecipacao'] = $this->input->post('taxa_antecipacao');
+        $dados['faturamento'] = $this->input->post('faturamento');
 
         if ($this->db->update('tab_estabelecimento', $dados)) {
             $this->session->set_flashdata('alerta', 'Estabelecimento atualizado com sucesso!');

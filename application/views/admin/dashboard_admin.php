@@ -154,7 +154,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Acompanhamento</h2>
+                    <h2>Receita Operacional por Periodo</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -184,8 +184,8 @@
                         <tr>
                             <th style="text-align: center">Periodo Referência</th>
                             <th style="text-align: center">Todal de Vendas</th>
-                            <th style="text-align: center">Lucro com Taxa</th>
-                            <th style="text-align: center">Lucro com Antecipação</th>
+                            <th style="text-align: center">Receita com Taxa</th>
+                            <th style="text-align: center">Receita com Antecipação</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -205,7 +205,7 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Vendas Por Periodo</h2>
+                    <h2>Faturamento Por Periodo</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -259,7 +259,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Lucro Antecipação Por Periodo</h2>
+                            <h2>Receita com Antecipação Por Periodo</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -286,7 +286,7 @@
                                     <th style="text-align: center">Periodo Referência</th>
                                     <th style="text-align: center">Estabelecimento</th>
                                     <th style="text-align: center">Valor Bruto</th>
-                                    <th style="text-align: center">Valor Lucro</th>
+                                    <th style="text-align: center">Valor Receita</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -309,7 +309,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>TOP 10 Estabelecimento em Lucros</h2>
+                                    <h2>TOP 10 Estabelecimento em Receita</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -334,7 +334,7 @@
                                         <thead>
                                         <tr>
                                             <th style="text-align: left">Estabelecimento</th>
-                                            <th style="text-align: right">Lucro</th>
+                                            <th style="text-align: right">Receita</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -361,7 +361,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>TOP 10 Estabelecimento em Vendas</h2>
+                                    <h2>TOP 10 Estabelecimento em Faturamento</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
@@ -386,7 +386,7 @@
                                         <thead>
                                         <tr>
                                             <th style="text-align: left">Estabelecimento</th>
-                                            <th style="text-align: right">Lucro</th>
+                                            <th style="text-align: right">Faturamento</th>
                                         </tr>
                                         </thead>
                                         <tbody>

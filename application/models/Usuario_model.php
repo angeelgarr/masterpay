@@ -2,6 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuario_model extends CI_Model {
+    
+    public function __construct() {
+        parent::__construct();
+        
+        $this->load->model('log_model');
+    }
 
     public function buscarUsuarios(){
         $this->db->select('tbu.*, tbu.id as usuario_id, tbe.id, tbe.comercial_name, tbe.company_name');
@@ -23,6 +29,12 @@ class Usuario_model extends CI_Model {
         $usuario['status']             = $this->input->post("status") == "true" ? true : false;
 
         if ($this->db->insert('tab_usuario',$usuario)) {
+
+            $user = $this->session->userdata('usuario_logado');
+                    $this->log_model->registrar_acao($user,
+                                            'USUARIO/CONSULTAR/NOVO',
+                                            'INSERT',
+                                            $usuario['estabelecimento_id']);
             return true;
         } else {
             return false;
@@ -39,6 +51,11 @@ class Usuario_model extends CI_Model {
         $usuario['status']             = $this->input->post("status") == "true" ? true : false;
 
         if ($this->db->update('tab_usuario', $usuario)) {
+            $user = $this->session->userdata('usuario_logado');
+                    $this->log_model->registrar_acao($user,
+                                            'USUARIO/CONSULTAR/EDITAR',
+                                            'UPDATE',
+                                            $usuario['estabelecimento_id']);
             $this->session->set_flashdata('sucesso', 'Usuário atualizado com sucesso!');
             redirect('usuario');
         } else {
@@ -80,5 +97,11 @@ class Usuario_model extends CI_Model {
             $this->session->set_flashdata('alerta', 'Ocorreu um erro ao tentar atualizar a senha!');
             redirect('login');
         }
+    }
+
+    public function atualizaUltimoAcesso($id) {
+        $dados['ultimo_acesso'] = date('Y-m-d H:i:s');
+        $this->db->where("id",$id);
+        $this->db->update('tab_usuario',$dados);
     }
 }

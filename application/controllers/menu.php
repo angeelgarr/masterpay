@@ -1,8 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Menu extends CI_Controller
-{
+class Menu extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        
+        $this->load->model('log_model');
+    }
 
     public function transacoes()
     {
@@ -55,6 +60,11 @@ class Menu extends CI_Controller
             "dataInicio" => "",
             "dataFim" => ""
         );
+
+		$this->log_model->registrar_acao($usuario,
+										'VENDAS/CONSULTAR TRANSAÇÕES',
+										'SELECT',
+									$usuario['estabelecimento_id']);
 
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');
@@ -170,6 +180,13 @@ class Menu extends CI_Controller
             "dataFim" => $dtFim
         );
 
+        $usuario = $this->session->userdata('usuario_logado');
+
+		$this->log_model->registrar_acao($usuario,
+										'VENDAS/CONSULTAR TRANSAÇÕES/INTERVALO DE DATAS',
+										'SELECT',
+									$usuario['estabelecimento_id']);
+
 		$this->load->view('includes/header');
 		$this->load->view('includes/side_menu');
 		$this->load->view('includes/top_menu');
@@ -230,6 +247,13 @@ class Menu extends CI_Controller
             "dataInicio" => "",
             "dataFim" => ""
         );
+
+        $usuario = $this->session->userdata('usuario_logado');
+
+		$this->log_model->registrar_acao($usuario,
+										'PAGAMENTOS/CONSULTAR REPASSES',
+										'SELECT',
+									$usuario['estabelecimento_id']);
 
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');
@@ -345,6 +369,13 @@ class Menu extends CI_Controller
             "dataInicio" => $dtInicio,
             "dataFim" => $dtFim
         );
+
+        $usuario = $this->session->userdata('usuario_logado');
+
+		$this->log_model->registrar_acao($usuario,
+										'PAGAMENTOS/REPASSES/CONSULTAR REPASSES/INTERVALO DE DATAS',
+										'SELECT',
+									$usuario['estabelecimento_id']);
 
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');
@@ -519,6 +550,13 @@ class Menu extends CI_Controller
             "dataFim" => $dtFim
         );
 
+        $usuario = $this->session->userdata('usuario_logado');
+
+		$this->log_model->registrar_acao($usuario,
+										'PAGAMENTOS/CONSULTAR PAGAMENTOS',
+										'SELECT',
+									$usuario['estabelecimento_id']);
+
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');
         $this->load->view('includes/top_menu');
@@ -558,6 +596,12 @@ class Menu extends CI_Controller
         $this->db->where('estabelecimento_id', $usuario['estabelecimento_id']);
         $dados['equipamento'] = $this->db->get('tab_controle_aluguel_equipamento')->result();
 
+        $this->log_model->registrar_acao($usuario,
+										'CONTRATO/EQUIPAMENTO ESCOLHIDO',
+										'SELECT',
+									$usuario['estabelecimento_id']);
+
+
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');
         $this->load->view('includes/top_menu');
@@ -582,6 +626,13 @@ class Menu extends CI_Controller
             $this->db->select('*');
             $dados['taxas'] = $this->db->get('tab_estabelecimento_parametro')->result();
         }
+
+        $usuario = $this->session->userdata('usuario_logado');
+
+		$this->log_model->registrar_acao($usuario,
+										'CONTRATO/TAXAS COMBINADAS',
+										'SELECT',
+									$usuario['estabelecimento_id']);
 
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');

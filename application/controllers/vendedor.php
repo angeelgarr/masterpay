@@ -2,6 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Vendedor extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+
+        $this->load->model('log_model');
+    }
+
     public function index() {
 //        $this->output->enable_profiler(TRUE);
         $this->session_verifier();
@@ -10,6 +17,13 @@ class Vendedor extends CI_Controller {
         $vendedores = $this->vendedores->buscarVendedores();
 
         $dados = array('vendedores' => $vendedores);
+
+        // registro de log
+        $usuario_logado = $this->session->userdata('usuario_logado');
+        $this->log_model->registrar_acao($usuario_logado,
+            'VENDEDOR/CONSULTAR',
+            'SELECT',
+            $usuario_logado['estabelecimento_id']);
 
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');
@@ -80,6 +94,31 @@ class Vendedor extends CI_Controller {
 
             $this->load->view('includes/footer');
         }
+    }
+
+    public function consultaVendedor() {
+//        $this->output->enable_profiler(TRUE);
+        $this->session_verifier();
+        $id_estabelecimento = $this->input->get("id");
+        $this->load->model('vendedor_model', 'vendedores');
+        $vendedores = $this->vendedores->buscarVendedores();
+
+        $this->load->model('estabelecimentos_model', 'estabelecimento');
+        $estabelecimento = $this->estabelecimento->buscaPorId($id_estabelecimento);
+
+        $dados = array(
+            "vendedores" => $vendedores,
+            "estabelecimento" => $estabelecimento
+        );
+
+        // registro de log
+        $usuario_logado = $this->session->userdata('usuario_logado');
+        $this->log_model->registrar_acao($usuario_logado,
+            'ESTABELECIMENTO/CONSULTAR/DETALHAR/ABA VENDEDOR',
+            'SELECT',
+            $id_estabelecimento);
+
+        $this->load->view('admin/estabelecimento_vendedor', $dados);
     }
 
     public function session_verifier() {

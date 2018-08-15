@@ -11,6 +11,10 @@
 
     <div class="x_title">
         <h2>Informações do Responsável</h2>
+        <button type="button" class="btn btn-primary btn-sm pull-right" id="btn-novo">
+            <i class="fa fa-plus"></i> Criar novo usuário com estes dados
+        </button>
+
         <div class="clearfix"></div>
     </div>
 
@@ -40,3 +44,13 @@
                value="<?= $proprietario["messenger_phone"]; ?>" required disabled />
     </div>
 </form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var base_url = "<?= base_url() ?>";
+
+        $("#formEdit").on("click", "#btn-novo", function () {
+//            alert('Criar novo usuário');
+        });
+    })
+</script>

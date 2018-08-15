@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Equipamento extends CI_Controller {
 
+    public function __construct() {
+        parent::__construct();
+        
+        $this->load->model('log_model');
+    }
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -82,6 +88,13 @@ class Equipamento extends CI_Controller {
         $equipamento = $this->equipamento->buscaPorIdEquipamento($id);
 
         $dados = array("equipamento" => $equipamento);
+        
+        $usuario = $this->session->userdata('usuario_logado');
+
+        $this->log_model->registrar_acao($usuario,
+                                        'ESTABELECIMENTO/CONSULTAR/DETALHAR/ABA EQUIPAMENTO',
+                                        'INSERT/UPDATE',
+                                        $id);
 
         $this->load->view('admin/detalhes_equipamento', $dados);
     }
@@ -91,20 +104,36 @@ class Equipamento extends CI_Controller {
         $id = $this->input->get("id");
 
         $dados = array("id_estabelecimento" => $id);
+        $usuario = $this->session->userdata('usuario_logado');
+
+        $this->log_model->registrar_acao($usuario,
+										'ESTABELECIMENTO/CONSULTAR/DETALHAR/EQUIPAMENTO/NOVO EQUIPAMENTO',
+										'CLICK -> NOVO',
+									$id);
 
         $this->load->view('admin/novo_equipamento', $dados);
     }
 
     public function add() {
         $this->session_verifier();
-
+        $usuario = $this->session->userdata('usuario_logado');
         $this->load->model("equipamento_model", "equipamento");
+       
+        $usuario = $this->session->userdata('usuario_logado');
+                                    
         $this->equipamento->inserir();
     }
 
     public function edit() {
         $this->session_verifier();
         $id = $this->input->get("id");
+        
+        $usuario = $this->session->userdata('usuario_logado');
+        
+        $this->log_model->registrar_acao($usuario,
+										'ESTABELECIMENTO/CONSULTAR/DETALHAR/EQUIPAMENTO/EDITAR EQUIPAMENTO',
+										'UPDATE',
+									$id);
 
         $this->load->model("equipamento_model", "equipamento");
         $this->equipamento->atualizarPorId($id);

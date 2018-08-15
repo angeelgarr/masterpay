@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Equipamento_model extends CI_Model
 {
+    public function __construct() {
+        parent::__construct();
+        
+        $this->load->model('log_model');
+    }
+
     public function buscaPorId($id)
     {
         $this->db->select('*');
@@ -61,6 +67,13 @@ class Equipamento_model extends CI_Model
         $dados['estabelecimento_id'] = $this->input->post('id_estabelecimento');
 
         if($this->db->insert('tab_controle_aluguel_equipamento',$dados)){
+
+            $user = $this->session->userdata('usuario_logado');
+                    $this->log_model->registrar_acao($user,
+                                            'ESTABELECIMENTO/CONSULTAR/DETALHAR/ABA EQUIPAMENTO/SALVAR EQUIPAMENTO',
+                                            'INSERT',
+                                            $dados['estabelecimento_id']);
+
             $this->session->set_flashdata('alerta','Equipamento cadastrado com sucesso!');
             redirect('estabelecimento/listar');
         } else {

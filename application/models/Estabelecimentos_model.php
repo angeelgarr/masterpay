@@ -42,12 +42,28 @@ class Estabelecimentos_model extends CI_Model
         $dados['idm'] = $this->input->post('idm');
         $dados['antecipa'] = $this->input->post('antecipa') == "true" ? true : false;
         $dados['taxa_antecipacao'] = $this->input->post('taxa_antecipacao');
+        $dados['faturamento'] = $this->input->post('faturamento');
 
         if ($this->db->update('tab_estabelecimento', $dados)) {
             $this->session->set_flashdata('alerta', 'Estabelecimento atualizado com sucesso!');
             redirect('estabelecimento/listar');
         } else {
             $this->session->set_flashdata('alerta', 'Ocorreu um erro ao tentar atualizar estabelecimento!');
+            redirect('estabelecimento/listar');
+        }
+    }
+
+
+    public function atualizarVendedor($id)
+    {
+        $this->db->where('id',$id);
+        $dados['vendedor_id'] = $this->input->post('vendedor');
+
+        if ($this->db->update('tab_estabelecimento', $dados)) {
+            $this->session->set_flashdata('alerta', 'Vendedor atualizado com sucesso!');
+            redirect('estabelecimento/listar');
+        } else {
+            $this->session->set_flashdata('alerta', 'Ocorreu um erro ao tentar atualizar vendedor!');
             redirect('estabelecimento/listar');
         }
     }

@@ -25,6 +25,10 @@
             <li role="presentation" class="">
                 <a href="#tab_content5" role="tab" id="equipamentos-tab" data-toggle="tab" aria-expanded="false">Equipamentos</a>
             </li>
+
+            <li role="presentation" class="">
+                <a href="#tab_content6" role="tab" id="vendedor-tab" data-toggle="tab" aria-expanded="false">Vendedor</a>
+            </li>
         </ul>
         <div id="tab-content" class="tab-content">
             <div class="alert alert-dismissible fade in" role="alert">
@@ -53,6 +57,10 @@
 
             <div role="tabpanel" class="tab-pane fade" id="tab_content5" aria-labelledby="equipamentos-tab">
                 <!-- Exibir Dados dos Equipamentos -->
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="tab_content6" aria-labelledby="vendedor-tab">
+                <!-- Exibir Dados do Vendedor -->
             </div>
         </div>
     </div>
@@ -140,6 +148,11 @@
             showContent(url, "#tab_content5");
         });
 
+        $("#tab-detalhes").on("click", "#vendedor-tab", function () {
+            var url = base_url + "vendedor/consultaVendedor?id=" + <?= $estabelecimento["id"]; ?>;
+            showContent(url, "#tab_content6");
+        });
+
         function saveData() {
             var urlForm = $("#formEdit").attr("action");
             $.ajax({
@@ -163,6 +176,12 @@
 </script>
 
 <style>
+    @media (min-width: 992px) {
+        .modal-lg {
+            width: 960px;
+        }
+    }
+
     .tab-content .alert {
         display: none;
     }

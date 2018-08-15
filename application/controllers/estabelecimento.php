@@ -3,6 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Estabelecimento extends CI_Controller {
 
+	public function __construct() {
+        parent::__construct();
+        
+        $this->load->model('log_model');
+    }
+
 	/**
 	 * Index Page for this controller.
 	 *
@@ -96,6 +102,13 @@ class Estabelecimento extends CI_Controller {
 
         $dados['estabelecimentos'] = $this->db->get('tab_estabelecimento')->result();
 
+		$usuario = $this->session->userdata('usuario_logado');
+		$this->log_model->registrar_acao($usuario,
+										'ESTABELECIMENTO/CONSULTAR',
+										'SELECT',
+									$usuario['estabelecimento_id']);
+
+
         $this->load->view('includes/header');
         $this->load->view('includes/side_menu');
         $this->load->view('includes/top_menu');
@@ -111,7 +124,14 @@ class Estabelecimento extends CI_Controller {
         $this->load->model("estabelecimentos_model", "estabelecimentos");
         $estabelecimento = $this->estabelecimentos->buscaPorId($id);
 
-        $dados = array("estabelecimento" => $estabelecimento);
+		$dados = array("estabelecimento" => $estabelecimento);
+
+		$usuario = $this->session->userdata('usuario_logado');
+		$this->log_model->registrar_acao($usuario,
+										'ESTABELECIMENTO/CONSULTAR/DETALHAR',
+										'SELECT',
+									$id);
+
 
         $this->load->view('admin/estabelecimento_detalhes', $dados);
     }
@@ -128,7 +148,13 @@ class Estabelecimento extends CI_Controller {
         $dados = array(
             "estabelecimento" => $estabelecimento,
             "categorias" => $categorias
-        );
+		);
+		
+		$usuario = $this->session->userdata('usuario_logado');
+		$this->log_model->registrar_acao($usuario,
+										'ESTABELECIMENTO/CONSULTAR/DETALHAR/ABA ESTABELECIMENTO',
+										'SELECT',
+									$id);
 
         $this->load->view('admin/estabelecimento_detalhe', $dados);
     }
@@ -137,8 +163,28 @@ class Estabelecimento extends CI_Controller {
         $this->session_verifier();
         $id = $this->input->get("id");
 
+		$usuario = $this->session->userdata('usuario_logado');
+		$this->log_model->registrar_acao($usuario,
+										'ESTABELECIMENTO/CONSULTAR/DETALHAR/EDITAR ESTABELECIMENTO',
+										'UPDATE',
+									$id);
+
         $this->load->model("estabelecimentos_model", "estabelecimento");
         $this->estabelecimento->atualizarPorId($id);
+    }
+
+    public function editVendedor() {
+        $this->session_verifier();
+        $id_vendedor = $this->input->get("id");
+
+        $usuario_logado = $this->session->userdata('usuario_logado');
+        $this->log_model->registrar_acao($usuario_logado,
+            'ESTABELECIMENTO/CONSULTAR/DETALHAR/EDITAR VENDEDOR ESTABELECIMENTO',
+            'UPDATE',
+            $usuario_logado['estabelecimento_id']);
+
+        $this->load->model("estabelecimentos_model", "estabelecimento");
+        $this->estabelecimento->atualizarVendedor($id_vendedor);
     }
 
 	public function session_verifier() {

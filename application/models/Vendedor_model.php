@@ -19,6 +19,12 @@ class Vendedor_model extends CI_Model {
         $vendedor['status']             = $this->input->post("status") == "true" ? true : false;
 
         if ($this->db->insert('tab_vendedor',$vendedor)) {
+            // registro de log
+            $usuario_logado = $this->session->userdata('usuario_logado');
+            $this->log_model->registrar_acao($usuario_logado,
+                'VENDEDOR/CONSULTAR/NOVO',
+                'INSERT',
+                $usuario_logado['estabelecimento_id']);
             return true;
         } else {
             return false;
@@ -34,6 +40,12 @@ class Vendedor_model extends CI_Model {
         $vendedor['status']             = $this->input->post("status") == "true" ? true : false;
 
         if ($this->db->update('tab_vendedor', $vendedor)) {
+            // registro de log
+            $usuario_logado = $this->session->userdata('usuario_logado');
+            $this->log_model->registrar_acao($usuario_logado,
+                'VENDEDOR/CONSULTAR/EDITAR',
+                'UPDATE',
+                $usuario_logado['estabelecimento_id']);
             $this->session->set_flashdata('sucesso', 'Vendedor atualizado com sucesso!');
             redirect('vendedor');
         } else {

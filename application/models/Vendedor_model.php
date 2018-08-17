@@ -15,8 +15,9 @@ class Vendedor_model extends CI_Model {
     {
         $vendedor['nome']               = $this->input->post("nome");
         $vendedor['email']              = $this->input->post("email");
-        $vendedor['phone']             = $this->input->post("phone");
+        $vendedor['telefone']           = $this->input->post("phone");
         $vendedor['status']             = $this->input->post("status") == "true" ? true : false;
+        $vendedor['data_inclusao']      = date('Y-m-d H:i:s');
 
         if ($this->db->insert('tab_vendedor',$vendedor)) {
             // registro de log

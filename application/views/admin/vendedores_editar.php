@@ -80,7 +80,7 @@ $detect = new Mobile_Detect;
                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
                                         <label for="phone">Email* :</label>
                                         <input type="phone" id="phone" class="form-control" name="phone" data-inputmask="'mask': '99999999999'"
-                                               data-parsley-trigger="change" value="<?= $vendedor["phone"]; ?>"
+                                               data-parsley-trigger="change" value="<?= $vendedor["telefone"]; ?>"
                                                required/>
                                     </div>
 

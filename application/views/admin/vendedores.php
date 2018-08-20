@@ -78,7 +78,7 @@ $detect = new Mobile_Detect;
                                         <td><?= $vendedor->id; ?></td>
                                         <td><?= $vendedor->nome; ?></td>
                                         <td><?= $vendedor->email; ?></td>
-                                        <td><?= $vendedor->phone; ?></td>
+                                        <td><?= $vendedor->telefone; ?></td>
                                         <td class="text-center">
                                             <span class="label <?= $vendedor->status == 1 ? 'label-success' : 'label-danger'; ?>">
                                                 <?= $vendedor->status == 1 ? 'ATIVO' : 'INATIVO'; ?>

@@ -9,6 +9,12 @@ class Estabelecimentos_model extends CI_Model
         ))->row_array();
     }
 
+    public function buscaPorIdProprietario($id) {
+        return $this->db->get_where("tab_estabelecimento", array(
+            "owner_id" => $id
+        ))->row_array();
+    }
+
     public function buscarEstabelecimentos()
     {
         $this->db->select('id, comercial_name, company_name');

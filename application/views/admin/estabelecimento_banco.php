@@ -63,6 +63,9 @@
                 004-Banco do Nordeste do
                 Brasil S.A.
             </option>
+            <option value="999-Cartão Pré-pago Maxpay" <?= $banco["codigo"] == '999' ? 'selected' : ''; ?>>
+                999-Cartão Pré-pago Maxpay
+            </option>
         </select>
     </div>
 

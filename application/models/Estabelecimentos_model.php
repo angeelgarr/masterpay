@@ -28,6 +28,7 @@ class Estabelecimentos_model extends CI_Model
 
     public function atualizarPorId($id)
     {
+        
         $this->db->where('id',$id);
         $dados['comercial_name'] = $this->input->post('comercial_name');
         $dados['company_name'] = $this->input->post('company_name');
@@ -74,4 +75,41 @@ class Estabelecimentos_model extends CI_Model
         }
     }
 
+    
+    public function atualizarAntecipacao($idestabelecimento,$taxa) {
+        $temAntecipacao = $this->db->get_where("tab_parametros_antecipacao", array(
+            "estabelecimento_id" => $idestabelecimento
+        ))->row_array();
+
+        $dados = $this->calcularTaxasAntecipacao($idestabelecimento,$taxa);
+
+        if($temAntecipacao) {
+            $this->db->where('estabelecimento_id',$idestabelecimento);
+            $this->db->update('tab_parametros_antecipacao',$dados);
+        } else {
+            $this->db->insert('tab_parametros_antecipacao',$dados);
+        }
+    }
+
+    private function calcularTaxasAntecipacao($idestabelecimento,$taxa){
+        
+        $rate = $taxa/100;
+		
+        $dados['taxa_credito_avista'] = round(100 * (97-(round(97 / $rate * (1-pow(1+$rate,-1)),2)))/97,2);;
+        $dados['taxa2parcelas'] = round(100 * (97-(round(48.50 / $rate * (1-pow(1+$rate,-2)),2)))/97,2);
+        $dados['taxa3parcelas'] = round(100 * (97-(round(32.333 / $rate * (1-pow(1+$rate,-3)),2)))/97,2);
+        $dados['taxa4parcelas'] = round(100 * (97-(round(24.25 / $rate * (1-pow(1+$rate,-4)),2)))/97,2);
+        $dados['taxa5parcelas'] = round(100 * (97-(round(19.40 / $rate * (1-pow(1+$rate,-5)),2)))/97,2);
+        $dados['taxa6parcelas'] = round(100 * (97-(round(16.166 / $rate * (1-pow(1+$rate,-6)),2)))/97,2);
+        $dados['taxa7parcelas'] = round(100 * (97-(round(13.857 / $rate * (1-pow(1+$rate,-7)),2)))/97,2);
+        $dados['taxa8parcelas'] = round(100 * (97-(round(12.125 / $rate * (1-pow(1+$rate,-8)),2)))/97,2);
+        $dados['taxa9parcelas'] = round(100 * (97-(round(10.77 / $rate * (1-pow(1+$rate,-9)),2)))/97,2);
+        $dados['taxa10parcelas'] = round(100 * (97-(round(9.7 / $rate * (1-pow(1+$rate,-10)),2)))/97,2);
+        $dados['taxa11parcelas'] = round(100 * (97-(round(8.818 / $rate * (1-pow(1+$rate,-11)),2)))/97,2);
+        $dados['taxa12parcelas'] = round(100 * (97-(round(8.083 / $rate * (1-pow(1+$rate,-12)),2)))/97,2);
+        $dados['estabelecimento_id'] = $idestabelecimento;
+
+        return $dados;
+
+    }
 }

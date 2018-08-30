@@ -33,6 +33,21 @@ class Antecipacao extends CI_Controller {
         
         $this->load->view('includes/footer');
 	}
+	
+	public function vp() {
+		$taxa = 0.035;
+		$nper = 1;
+		$pmt  = 97;
+		
+		$result = round(100 * (97-(round($pmt / $taxa * (1-pow(1+$taxa,-$nper)),2)))/97,2);
+
+		echo $result;
+	}
+
+	public function vp2() {
+		$this->load->model('Estabelecimentos_model','loja');
+		$this->loja->atualizarAntecipacao(8,5);
+	}
 
 	public function session_verifier() {
 		if($this->session->userdata('usuario_logado')==false) {

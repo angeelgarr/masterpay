@@ -45,7 +45,7 @@ class Admin_model extends CI_Model {
     }
 
 	public function lucro_antecipacao_por_periodo() {
-		$this->db->select('DATE_FORMAT(ttr.data_transacao,'."'%m/%Y'".') as periodo_ref,tte.comercial_name,sum(ttr.valor_transacao) as valor_bruto, sum(ttr.lucro_antecipacao) as valor_lucro');
+		$this->db->select('DATE_FORMAT(ttr.data_transacao,'."'%m/%Y'".') as periodo_ref,tte.comercial_name,sum(ttr.valor_transacao) as valor_bruto, COALESCE(sum(lucro_antecipacao),0) as valor_lucro');
 		$this->db->where('ttr.estabelecimento_id=tte.id');
 		$this->db->where('tte.antecipa=1');
 		$this->db->group_by('periodo_ref, tte.comercial_name');

@@ -46,7 +46,7 @@ class Antecipacao extends CI_Controller {
 
 	public function vp2() {
 		$this->load->model('Estabelecimentos_model','loja');
-		$this->loja->atualizarAntecipacao(8,5);
+		$this->loja->atualizarAntecipacao(59,3);
 	}
 
 	public function session_verifier() {

@@ -48,7 +48,7 @@ class Dashboard extends CI_Controller {
 		$data['total_mes_atual']				= $this->dashboard_model->total_mes_atual()['total_mes_atual'];
 		$data['total_mes_seguinte']				= $this->dashboard_model->total_mes_seguinte()['total_mes_seguinte'];
 
-
+		$data['agenda_semana']					= $this->dashboard_model->agenda_semana();
 		$usuario = $this->session->userdata('usuario_logado');
 
 		$this->log_model->registrar_acao($usuario,

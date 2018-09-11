@@ -226,5 +226,25 @@ class Dashboard_model extends CI_Model {
 		}
 		return $total;
 	}
+
+	public function agenda_semana() {
+		$this->db->query("set lc_time_names = 'pt_PT'");
+		$usuario = $this->session->userdata('usuario_logado');
+
+		$select= 'DAYNAME(DATE_FORMAT(ttr.data_repasse,'."'%Y%m%d'". ')) dia_semana,
+			DATE_FORMAT(ttr.data_repasse,'."'%Y%m%d'".') diamesano,
+			DATE_FORMAT(ttr.data_repasse,'."'%d/%m'".') dia_mes, 
+			sum(ttr.liquido_cliente) valor, ttr.status ';
+		
+		$this->db->select($select);
+		$this->db->where('ttr.estabelecimento_id', $usuario['estabelecimento_id']);
+		$this->db->where('DATE_FORMAT(ttr.data_repasse,'."'%Y%m%d'".') BETWEEN DATE_FORMAT(CURRENT_DATE,'."'%Y%m%d'". ')');
+		$this->db->where('DATE_FORMAT(DATE_add(CURRENT_DATE,INTERVAL 7 DAY),'."'%Y%m%d'".')');
+		$this->db->group_by('dia_semana,ttr.status');
+		$this->db->order_by('diamesano'); 
+
+		return $this->db->get('tab_transacao_repasse as ttr')->result();
+
+	}
 	
 }

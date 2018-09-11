@@ -92,9 +92,80 @@
           </div>
           <!-- /top tiles -->
 </div>
+        <?php if($this->session->userdata('usuario_logado')['perfil']=='CLIENTE') { ?>
           <br />
+                <div class="row">
 
-          
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Agenda a Semana</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  
+                     <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th style="text-align: center">Dia Semana</th>
+                          <th style="text-align: center">Data</th>
+                          <th style="text-align: center">Valor</th>
+                          <th style="text-align: center">Status</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                      <?php foreach ($agenda_semana as $item) { ?>
+                          <tr>
+                          <td style="text-align: center"><?= $item->dia_semana ?></td>
+                          <td style="text-align: center"><?= $item->dia_mes ?></td>
+                          <td style="text-align: right"><?= number_format($item->valor,2,',','.'); ?></td>
+                         
+                          <td style="text-align: center">
+                          <?php if($item->status == 'COMPENSADO') { ?>
+                              <span class="label label-primary">
+                                <?= $item->status ?>
+                              </span>
+                            <?php } ?>
+
+                            <?php if($item->status == 'PENDENTE') { ?>
+                              <span class="label label-danger">
+                                <?= $item->status ?>
+                              </span>
+                            <?php } ?>
+
+                            <?php if($item->status == 'FILA_COMPENSACAO') { ?>
+                              <span class="label label-warning">
+                                <?= $item->status ?>
+                              </span>
+                            <?php } ?>
+                              
+                          </td>
+                         
+                          </tr>
+                      <?php } ?>
+                      </tbody>
+
+                    </table>
+
+                </div>
+          <br/>
+        <?php } ?>
                 <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">

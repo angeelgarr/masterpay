@@ -282,6 +282,10 @@
                                   <td style="text-align: left"><img src="<?= base_url(); ?>assets/images/bancoitau.png"></td>
                               <?php } ?>
 
+                              <?php if($item->codigo == '999') { ?>
+                                  <td style="text-align: left"><img width="150" height="40" src="<?= base_url(); ?>assets/images/cartaopre.png"></td>
+                              <?php } ?>
+
                                 <td style="text-align: right"><span><?= number_format($item->valor,2,',','.');?></span></td>
                               
                               </tr>
@@ -347,6 +351,10 @@
 
                               <?php if($item->codigo == '341') { ?>
                                   <td style="text-align: left"><img src="<?= base_url(); ?>assets/images/bancoitau.png"></td>
+                              <?php } ?>
+
+                              <?php if($item->codigo == '999') { ?>
+                                  <td style="text-align: left"><img width="150" height="40" src="<?= base_url(); ?>assets/images/cartaopre.png"></td>
                               <?php } ?>
 
                                 <td style="text-align: right"><span><?= number_format($item->valor,2,',','.');?></span></td>
@@ -419,6 +427,10 @@
 
                               <?php if($item->codigo == '341') { ?>
                                   <td style="text-align: left"><img src="<?= base_url(); ?>assets/images/bancoitau.png"></td>
+                              <?php } ?>
+
+                              <?php if($item->codigo == '999') { ?>
+                                  <td style="text-align: left"><img width="150" height="40" src="<?= base_url(); ?>assets/images/cartaopre.png"></td>
                               <?php } ?>
 
                                 <td style="text-align: right"><span><?= number_format($item->valor,2,',','.');?></span></td>

@@ -143,6 +143,168 @@ class Dashboard extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 
+    public function reportTransactionsByDay()
+    {
+        $this->load->library("PHPExcel");
+        $this->load->helper('download');
+
+        $this->load->model('admin_model');
+
+        $archive = './reports/receita-operacional-por-periodo.slsx';
+        $spreadsheet = $this->phpexcel;
+
+        $transacoes_por_dia = $this->admin_model->transacoes_por_dia();
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'Periodo Referência');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B1', 'Todal de Vendas');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C1', 'Receita com Taxa');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D1', 'Receita com Antecipação');
+
+        $count = 1;
+        foreach($transacoes_por_dia as $item):
+            $count++;
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->periodo);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$count, number_format($item->total_vendas, 2, ',', '.'));
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$count, number_format($item->lucro_taxas, 2, ',', '.'));
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$count, number_format($item->lucro_antecipacao, 2, ',', '.'));
+        endforeach;
+
+        $spreadsheet->getActiveSheet()->setTitle('Receita Operacional por Periodo');
+
+        $objGravar = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
+        $objGravar->save($archive);
+
+        force_download($archive, NULL);
+    }
+
+    public function reportSalesByPeriod()
+    {
+        $this->load->library("PHPExcel");
+        $this->load->helper('download');
+
+        $this->load->model('admin_model');
+
+        $archive = './reports/vendas-por-periodo.slsx';
+        $spreadsheet = $this->phpexcel;
+
+        $vendas_por_periodo = $this->admin_model->vendas_por_periodo();
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'Periodo Referência');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B1', 'Estabelecimento');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C1', 'Valor Bruto');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D1', 'Valor Lucro');
+
+        $count = 1;
+        foreach($vendas_por_periodo as $item):
+            $count++;
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->periodo_ref);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$count, $item->comercial_name);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$count, number_format($item->valor_bruto, 2, ',', '.'));
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$count, number_format($item->valor_lucro, 2, ',', '.'));
+        endforeach;
+
+        $spreadsheet->getActiveSheet()->setTitle('Receita Operacional por Periodo');
+
+        $objGravar = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
+        $objGravar->save($archive);
+
+        force_download($archive, NULL);
+    }
+
+    public function reportProfitByPeriod()
+    {
+        $this->load->library("PHPExcel");
+        $this->load->helper('download');
+
+        $this->load->model('admin_model');
+
+        $archive = './reports/lucro-antecipacao-por-periodo.slsx';
+        $spreadsheet = $this->phpexcel;
+
+        $lucro_antecipacao_por_periodo = $this->admin_model->lucro_antecipacao_por_periodo();
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'Periodo Referência');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B1', 'Estabelecimento');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C1', 'Valor Bruto');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D1', 'Valor Lucro');
+
+        $count = 1;
+        foreach($lucro_antecipacao_por_periodo as $item):
+            $count++;
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->periodo_ref);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$count, $item->comercial_name);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$count, number_format($item->valor_bruto, 2, ',', '.'));
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$count, number_format($item->valor_lucro, 2, ',', '.'));
+        endforeach;
+
+        $spreadsheet->getActiveSheet()->setTitle('Receita Operacional por Periodo');
+
+        $objGravar = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
+        $objGravar->save($archive);
+
+        force_download($archive, NULL);
+    }
+
+    public function reportTopProfits()
+    {
+        $this->load->library("PHPExcel");
+        $this->load->helper('download');
+
+        $this->load->model('admin_model');
+
+        $archive = './reports/maiores-lucros.slsx';
+        $spreadsheet = $this->phpexcel;
+
+        $maiores_lucros = $this->admin_model->maiores_lucros();
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'Estabelecimento');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B1', 'Receita');
+
+        $count = 1;
+        foreach($maiores_lucros as $item):
+            $count++;
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->comercial_name);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$count, number_format($item->valor, 2, ',', '.'));
+        endforeach;
+
+        $spreadsheet->getActiveSheet()->setTitle('TOP 10 em Receita');
+
+        $objGravar = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
+        $objGravar->save($archive);
+
+        force_download($archive, NULL);
+    }
+
+    public function reportTopStablishments()
+    {
+        $this->load->library("PHPExcel");
+        $this->load->helper('download');
+
+        $this->load->model('admin_model');
+
+        $archive = './reports/maiores-estabelecimentos.slsx';
+        $spreadsheet = $this->phpexcel;
+
+        $maiores_estabelecimento = $this->admin_model->maiores_estabelecimento();
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'Estabelecimento');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B1', 'Faturamento');
+
+        $count = 1;
+        foreach($maiores_estabelecimento as $item):
+            $count++;
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->comercial_name);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$count, number_format($item->valor, 2, ',', '.'));
+        endforeach;
+
+        $spreadsheet->getActiveSheet()->setTitle('TOP 10 em Faturamento');
+
+        $objGravar = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
+        $objGravar->save($archive);
+
+        force_download($archive, NULL);
+    }
+
 	public function graficos()
 	{
 		$this->session_verifier();
@@ -161,11 +323,10 @@ class Dashboard extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 
-	public function criar_grafico() {
-		
+	public function criar_grafico()
+    {
 		$this->load->model('admin_model');
 		$lucros_por_mes			= $this->admin_model->lucros_por_mes();
-		
 
 		$dados['tarefas'] = array(
 			"labels" => array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto","Setembro","Outubro","Novembro","Dezembro"),

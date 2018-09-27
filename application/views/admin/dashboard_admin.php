@@ -156,6 +156,8 @@
                 <div class="x_title">
                     <h2>Receita Operacional por Periodo</h2>
                     <ul class="nav navbar-right panel_toolbox">
+                        <li><a href="reportTransactionsByDay" style="color: #008641"><i class="fa fa-file-excel-o"></i></a>
+                        </li>
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
@@ -207,6 +209,8 @@
                 <div class="x_title">
                     <h2>Faturamento Por Periodo</h2>
                     <ul class="nav navbar-right panel_toolbox">
+                        <li><a href="reportSalesByPeriod" style="color: #008641"><i class="fa fa-file-excel-o"></i></a>
+                        </li>
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
                         <li class="dropdown">
@@ -261,6 +265,8 @@
                         <div class="x_title">
                             <h2>Receita com Antecipação Por Periodo</h2>
                             <ul class="nav navbar-right panel_toolbox">
+                                <li><a href="reportProfitByPeriod" style="color: #008641"><i class="fa fa-file-excel-o"></i></a>
+                                </li>
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
                                 <li class="dropdown">
@@ -311,6 +317,8 @@
                                 <div class="x_title">
                                     <h2>TOP 10 Estabelecimento em Receita</h2>
                                     <ul class="nav navbar-right panel_toolbox">
+                                        <li><a href="reportTopProfits" style="color: #008641"><i class="fa fa-file-excel-o"></i></a>
+                                        </li>
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
                                         <li class="dropdown">
@@ -363,6 +371,8 @@
                                 <div class="x_title">
                                     <h2>TOP 10 Estabelecimento em Faturamento</h2>
                                     <ul class="nav navbar-right panel_toolbox">
+                                        <li><a href="reportTopStablishments" style="color: #008641"><i class="fa fa-file-excel-o"></i></a>
+                                        </li>
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                         </li>
                                         <li class="dropdown">

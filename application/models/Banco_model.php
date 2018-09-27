@@ -25,6 +25,7 @@ class Banco_model extends CI_Model
         $dados['conta'] = $this->input->post('conta');
         $dados['data_inclusao'] = date('Y-m-d H:i:s');
         $dados['tipo_conta'] = $this->input->post('tipo');
+        $dados['idcartao'] = $this->input->post('idcartao');
 
         if($id) {
             if ($this->db->update('tab_banco', $dados)) {

@@ -90,5 +90,11 @@
                data-parsley-trigger="change" value="<?= $banco["conta"]; ?>" required/>
     </div>
 
+    <div class="col-md-4 col-sm-4 col-xs-12 form-group">
+        <label for="conta">ID Cartão* :</label>
+        <input type="text" id="idcartao" class="form-control" name="idcartao"
+               data-parsley-trigger="change" value="<?= $banco["idcartao"]; ?>" required/>
+    </div>
+
     <input type="hidden" name="id_estabelecimento" value="<?= $id_estabelecimento; ?>" />
 </form>

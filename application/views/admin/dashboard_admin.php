@@ -76,25 +76,25 @@
             </div>
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-money"></i> Lucro Taxas Hoje</span>
+                <span class="count_top"><i class="fa fa-money"></i> Receita Taxas Hoje</span>
                 <div class="count green"><?= number_format($total_lucro_dia_taxas, 2, ',', '.'); ?></div>
                 <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
             </div>
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-money"></i> Lucro Antec. Hoje </span>
+                <span class="count_top"><i class="fa fa-money"></i> Receita Antec. Hoje </span>
                 <div class="count green"><?= number_format($total_lucro_dia_antecipacao, 2, ',', '.'); ?></div>
                 <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
             </div>
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-money"></i> Lucro Aluguel Hoje </span>
+                <span class="count_top"><i class="fa fa-money"></i> Receita Aluguel Hoje </span>
                 <div class="count green"><?= number_format($total_lucro_aluguel_dia, 2, ',', '.'); ?></div>
                 <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
             </div>
 
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                <span class="count_top"><i class="fa fa-money"></i>Lucro Total Hoje </span>
+                <span class="count_top"><i class="fa fa-money"></i>Receita Total Hoje </span>
                 <div class="count blue"><?= number_format($total_lucro_dia_geral, 2, ',', '.'); ?></div>
                 <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
             </div>

@@ -85,6 +85,8 @@
                   <div class="x_title">
                     <h2>TED's Para Hoje</h2>
                     <ul class="nav navbar-right panel_toolbox">
+                      <li><a href="reportTedsByDay" style="color: #008641">Exportar cartão pré-pago</a>
+                      </li>
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">

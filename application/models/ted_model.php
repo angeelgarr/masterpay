@@ -66,4 +66,13 @@ class Ted_model extends CI_Model {
 		$this->db->order_by('valor','DESC');
 		return $this->db->get('tab_conta_corrente_transacao as cc, tab_banco as tb')->result();
 	}
+
+	public function ted_pre_pago() {
+        $this->db->select('tb.id, tb.agencia, ROUND(tc.total_geral, 2) as total, tb.conta');
+        $this->db->where('tb.codigo','999');
+        $this->db->where('tc.status = 0');
+        $this->db->where('tb.estabelecimento_id = te.id');
+        $this->db->where('tc.estabelecimento_id = te.id');
+        return $this->db->get('tab_banco as tb, tab_estabelecimento as  te, tab_conta_corrente_transacao as tc')->result();
+    }
 }

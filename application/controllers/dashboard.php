@@ -143,14 +143,52 @@ class Dashboard extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 
+    public function reportTedsByDay()
+    {
+        $this->session_verifier();
+
+        $this->load->library("PHPExcel");
+        $this->load->helper('download');
+
+        $this->load->model('ted_model');
+
+        $archive = './reports/carga_cartao_lote.csv';
+        $spreadsheet = $this->phpexcel;
+
+        $ted_pre_pago = $this->ted_model->ted_pre_pago();
+
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'ID do Cartão');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B1', 'NºCartão');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C1', 'Valor da transação');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D1', 'NºDocumento');
+
+        $count = 1;
+        foreach($ted_pre_pago as $item):
+            $count++;
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->id);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$count, $item->agencia);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$count, number_format($item->total, 2, ',', '.'));
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$count, $item->conta);
+        endforeach;
+
+//        $spreadsheet->getActiveSheet()->setTitle('Cartão Pré Pago');
+
+        $objGravar = PHPExcel_IOFactory::createWriter($spreadsheet, 'CSV');
+        $objGravar->save($archive);
+
+        force_download($archive, NULL);
+    }
+
     public function reportTransactionsByDay()
     {
+        $this->session_verifier();
+
         $this->load->library("PHPExcel");
         $this->load->helper('download');
 
         $this->load->model('admin_model');
 
-        $archive = './reports/receita-operacional-por-periodo.slsx';
+        $archive = './reports/receita_operacional_por_periodo.slsx';
         $spreadsheet = $this->phpexcel;
 
         $transacoes_por_dia = $this->admin_model->transacoes_por_dia();
@@ -179,12 +217,14 @@ class Dashboard extends CI_Controller {
 
     public function reportSalesByPeriod()
     {
+        $this->session_verifier();
+
         $this->load->library("PHPExcel");
         $this->load->helper('download');
 
         $this->load->model('admin_model');
 
-        $archive = './reports/vendas-por-periodo.slsx';
+        $archive = './reports/vendas_por_periodo.slsx';
         $spreadsheet = $this->phpexcel;
 
         $vendas_por_periodo = $this->admin_model->vendas_por_periodo();
@@ -213,12 +253,14 @@ class Dashboard extends CI_Controller {
 
     public function reportProfitByPeriod()
     {
+        $this->session_verifier();
+
         $this->load->library("PHPExcel");
         $this->load->helper('download');
 
         $this->load->model('admin_model');
 
-        $archive = './reports/lucro-antecipacao-por-periodo.slsx';
+        $archive = './reports/lucro_antecipacao_por_periodo.slsx';
         $spreadsheet = $this->phpexcel;
 
         $lucro_antecipacao_por_periodo = $this->admin_model->lucro_antecipacao_por_periodo();
@@ -247,12 +289,14 @@ class Dashboard extends CI_Controller {
 
     public function reportTopProfits()
     {
+        $this->session_verifier();
+
         $this->load->library("PHPExcel");
         $this->load->helper('download');
 
         $this->load->model('admin_model');
 
-        $archive = './reports/maiores-lucros.slsx';
+        $archive = './reports/maiores_lucros.slsx';
         $spreadsheet = $this->phpexcel;
 
         $maiores_lucros = $this->admin_model->maiores_lucros();
@@ -277,12 +321,14 @@ class Dashboard extends CI_Controller {
 
     public function reportTopStablishments()
     {
+        $this->session_verifier();
+
         $this->load->library("PHPExcel");
         $this->load->helper('download');
 
         $this->load->model('admin_model');
 
-        $archive = './reports/maiores-estabelecimentos.slsx';
+        $archive = './reports/maiores_estabelecimentos.slsx';
         $spreadsheet = $this->phpexcel;
 
         $maiores_estabelecimento = $this->admin_model->maiores_estabelecimento();

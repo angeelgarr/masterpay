@@ -165,9 +165,9 @@ class Dashboard extends CI_Controller {
         $count = 1;
         foreach($ted_pre_pago as $item):
             $count++;
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->id);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->idcartao);
             $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$count, $item->agencia);
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$count, number_format($item->total, 2, ',', '.'));
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$count, $item->total);
             $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$count, $item->conta);
         endforeach;
 
@@ -188,7 +188,7 @@ class Dashboard extends CI_Controller {
 
         $this->load->model('admin_model');
 
-        $archive = './reports/receita_operacional_por_periodo.slsx';
+        $archive = './reports/receita_operacional_por_periodo.xlsx';
         $spreadsheet = $this->phpexcel;
 
         $transacoes_por_dia = $this->admin_model->transacoes_por_dia();
@@ -224,7 +224,7 @@ class Dashboard extends CI_Controller {
 
         $this->load->model('admin_model');
 
-        $archive = './reports/vendas_por_periodo.slsx';
+        $archive = './reports/vendas_por_periodo.xlsx';
         $spreadsheet = $this->phpexcel;
 
         $vendas_por_periodo = $this->admin_model->vendas_por_periodo();
@@ -260,7 +260,7 @@ class Dashboard extends CI_Controller {
 
         $this->load->model('admin_model');
 
-        $archive = './reports/lucro_antecipacao_por_periodo.slsx';
+        $archive = './reports/lucro_antecipacao_por_periodo.xlsx';
         $spreadsheet = $this->phpexcel;
 
         $lucro_antecipacao_por_periodo = $this->admin_model->lucro_antecipacao_por_periodo();
@@ -328,7 +328,7 @@ class Dashboard extends CI_Controller {
 
         $this->load->model('admin_model');
 
-        $archive = './reports/maiores_estabelecimentos.slsx';
+        $archive = './reports/maiores_estabelecimentos.xlsx';
         $spreadsheet = $this->phpexcel;
 
         $maiores_estabelecimento = $this->admin_model->maiores_estabelecimento();

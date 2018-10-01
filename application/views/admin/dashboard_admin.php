@@ -188,6 +188,7 @@
                             <th style="text-align: center">Todal de Vendas</th>
                             <th style="text-align: center">Receita com Taxa</th>
                             <th style="text-align: center">Receita com Antecipação</th>
+                            <th style="text-align: center">Total Receita Operacional</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -198,6 +199,7 @@
                                 <td><?= number_format($item->total_vendas, 2, ',', '.'); ?></td>
                                 <td style="text-align: right"><?= number_format($item->lucro_taxas, 2, ',', '.'); ?></td>
                                 <td style="text-align: right"><?= number_format($item->lucro_antecipacao, 2, ',', '.'); ?></td>
+                                <td style="text-align: right"><?= number_format($item->lucro_taxas+$item->lucro_antecipacao, 2, ',', '.'); ?></td>
                             </tr>
                         <?php } ?>
 
@@ -207,7 +209,7 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Faturamento Por Periodo</h2>
+                    <h2>Receita Por Periodo e Estabelecimento</h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a href="reportSalesByPeriod" style="color: #008641"><i class="fa fa-file-excel-o"></i></a>
                         </li>
@@ -239,8 +241,8 @@
                         <tr>
                             <th style="text-align: center">Periodo Referência</th>
                             <th style="text-align: center">Estabelecimento</th>
-                            <th style="text-align: center">Valor Bruto</th>
-                            <th style="text-align: center">Valor Lucro</th>
+                            <th style="text-align: center">Faturamento</th>
+                            <th style="text-align: center">Receita Operacional</th>
                         </tr>
                         </thead>
                         <tbody>

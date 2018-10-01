@@ -75,11 +75,11 @@ $query_builder = TRUE;
 
 $db['default'] = array(
     'dsn'	=> '',
-    #'hostname' => '45.79.156.102',
-    'hostname' => 'localhost',
+    'hostname' => '45.79.156.102',
+    #'hostname' => 'localhost',
     'username' => 'root',
-    #'password' => '_Sup3rM45t3rP4!_',
-    'password' => '',
+    'password' => '_Sup3rM45t3rP4!_',
+    #'password' => '',
     'database' => 'masterpay',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',

@@ -157,21 +157,13 @@ class Dashboard extends CI_Controller {
 
         $ted_pre_pago = $this->ted_model->ted_pre_pago();
 
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'ID do Cartão');
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('B1', 'NºCartão');
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('C1', 'Valor da transação');
-        $spreadsheet->setActiveSheetIndex(0)->setCellValue('D1', 'NºDocumento');
+        $spreadsheet->setActiveSheetIndex(0)->setCellValue('A1', 'ID do Cartão;NºCartão;Valor da transação;NºDocumento');
 
         $count = 1;
         foreach($ted_pre_pago as $item):
             $count++;
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->idcartao);
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('B'.$count, $item->agencia);
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('C'.$count, $item->total);
-            $spreadsheet->setActiveSheetIndex(0)->setCellValue('D'.$count, $item->conta);
+            $spreadsheet->setActiveSheetIndex(0)->setCellValue('A'.$count, $item->idcartao.';'.$item->agencia.';'.$item->total.';'.$item->conta);
         endforeach;
-
-//        $spreadsheet->getActiveSheet()->setTitle('Cartão Pré Pago');
 
         $objGravar = PHPExcel_IOFactory::createWriter($spreadsheet, 'CSV');
         $objGravar->save($archive);

@@ -75,6 +75,7 @@
                 required>
             <option value="CC" <?= $banco["tipo_conta"] == 'CC' ? 'selected' : ''; ?>>CONTA CORRENTE</option>
             <option value="CP" <?= $banco["tipo_conta"] == 'CP' ? 'selected' : '' ?>>CONTA POUPANÇA</option>
+            <option value="CP" <?= $banco["tipo_conta"] == 'CF' ? 'selected' : '' ?>>CONTA FÁCIL CAIXA</option>
         </select>
     </div>
 
@@ -94,6 +95,12 @@
         <label for="conta">ID Cartão* :</label>
         <input type="text" id="idcartao" class="form-control" name="idcartao"
                data-parsley-trigger="change" value="<?= $banco["idcartao"]; ?>" required/>
+    </div>
+
+    <div class="col-md-2 col-sm-4 col-xs-12 form-group">
+        <label for="conta">Tipo Operação* :</label>
+        <input type="text" id="tipooperacao" class="form-control" name="tipooperacao"
+               data-parsley-trigger="change" value="<?= $banco["tipo_operacao"]; ?>" required/>
     </div>
 
     <input type="hidden" name="id_estabelecimento" value="<?= $id_estabelecimento; ?>" />

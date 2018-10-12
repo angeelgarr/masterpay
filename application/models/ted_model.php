@@ -5,7 +5,7 @@ class Ted_model extends CI_Model {
 
     public function total_ted_dia() {
 
-		$this->db->select('tcc.total_geral as valor,tcc.status, tte.comercial_name, tte.national_id, tb.codigo, tb.agencia, tb.conta, tb.tipo_conta');
+		$this->db->select('tcc.total_geral as valor,tcc.status, tte.comercial_name, tte.national_id, tb.codigo, tb.agencia, tb.tipo_operacao, tb.conta, tb.tipo_conta');
 		$this->db->where('tcc.estabelecimento_id = tte.id');
 		$this->db->where('tb.estabelecimento_id=tte.id');
 		$this->db->where('tcc.status','0');
@@ -13,7 +13,7 @@ class Ted_model extends CI_Model {
 		$query1 = $this->db->get('tab_conta_corrente_transacao as tcc,tab_estabelecimento as tte, tab_banco as tb')->result();
 
 
-		$this->db->select('tcc.total_geral as valor,tcc.status, tte.comercial_name, tte.national_id, tb.codigo, tb.agencia, tb.conta, tb.tipo_conta');
+		$this->db->select('tcc.total_geral as valor,tcc.status, tte.comercial_name, tte.national_id, tb.codigo, tb.agencia, tb.tipo_operacao,,tb.conta, tb.tipo_conta');
 		$this->db->where('tcc.estabelecimento_id = tte.id');
 		$this->db->where('tb.estabelecimento_id=tte.id');
 		$this->db->where('date_format(tcc.data_confirmacao,'."'%Y%m%d'".') = date_format(CURRENT_DATE,'."'%Y%m%d'".')');

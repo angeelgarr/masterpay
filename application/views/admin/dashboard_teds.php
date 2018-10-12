@@ -115,6 +115,7 @@
                               <th style="text-align: center">Código Banco</th>
                               <th style="text-align: center">Agência</th>
                               <th style="text-align: center">Conta</th>
+                              <th style="text-align: center">Operação</th>
                               <th style="text-align: center">Tipo Conta</th>
                           <?php } ?> 
                           <th style="text-align: center">Valor</th>
@@ -187,6 +188,7 @@
                                   <td style="text-align: center"><span><?= $item->codigo ?></span></td>
                                   <td style="text-align: center"><span><?= $item->agencia ?></span></td>
                                   <td style="text-align: center"><span><?= $item->conta ?></span></td>
+                                  <td style="text-align: center"><span><?= $item->tipo_operacao ?></span></td>
                                 
                                 <?php if ($item->tipo_conta == 'CC') { ?>
                                   <td style="text-align: center;"><span class="label label-primary" >CORRENTE</span></td>

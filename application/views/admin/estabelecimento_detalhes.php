@@ -29,6 +29,9 @@
             <li role="presentation" class="">
                 <a href="#tab_content6" role="tab" id="vendedor-tab" data-toggle="tab" aria-expanded="false">Vendedor</a>
             </li>
+            <li role="presentation" class="">
+                <a href="#tab_content7" role="tab" id="observacao-tab" data-toggle="tab" aria-expanded="false">Observação</a>
+            </li>
         </ul>
         <div id="tab-content" class="tab-content">
             <div class="alert alert-dismissible fade in" role="alert">
@@ -60,6 +63,10 @@
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="tab_content6" aria-labelledby="vendedor-tab">
+                <!-- Exibir Dados do Vendedor -->
+            </div>
+
+            <div role="tabpanel" class="tab-pane fade" id="tab_content7" aria-labelledby="observacao-tab">
                 <!-- Exibir Dados do Vendedor -->
             </div>
         </div>

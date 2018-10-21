@@ -67,7 +67,7 @@
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="tab_content7" aria-labelledby="observacao-tab">
-                <!-- Exibir Dados do Vendedor -->
+                <!-- Exibir Observação sobre alterações -->
             </div>
         </div>
     </div>
@@ -82,13 +82,13 @@
 <script type="text/javascript">
     $(document).ready(function () {
         function enableEdit() {
-            $(".tab-content input, .tab-content select, .tab-content radio").removeAttr("disabled");
+            $(".tab-content input, .tab-content select, .tab-content radio, .tab-content textarea").removeAttr("disabled");
             $("#btnSave, #btnCancel").show();
             $("#btnEdit").hide();
         }
 
         function disableEdit() {
-            $(".tab-content input, .tab-content select, .tab-content radio").attr("disabled", "disabled");
+            $(".tab-content input, .tab-content select, .tab-content radio, .tab-content textarea").attr("disabled", "disabled");
             $("#btnEdit").show();
             $("#btnCancel, #btnSave").hide();
         }
@@ -160,6 +160,11 @@
             showContent(url, "#tab_content6");
         });
 
+        $("#tab-detalhes").on("click", "#observacao-tab", function () {
+            var url = base_url + "observacao/view?id=" + <?= $estabelecimento["id"]; ?>;
+            showContent(url, "#tab_content7");
+        });
+
         function saveData() {
             var urlForm = $("#formEdit").attr("action");
             $.ajax({
@@ -185,7 +190,8 @@
 <style>
     @media (min-width: 992px) {
         .modal-lg {
-            width: 960px;
+            /*width: 960px;*/
+            width: 1070px;
         }
     }
 

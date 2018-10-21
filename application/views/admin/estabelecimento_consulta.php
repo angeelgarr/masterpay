@@ -60,6 +60,7 @@ $detect = new Mobile_Detect;
                                     <th>ID Maxpay</th>
                                     <th>Nome Fantasia</th>
                                     <th>Responsável</th>
+                                    <th>Status <button style="margin-top: 4px" type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="right" title="<?= $ativos ?> clientes ativos"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button></th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -69,6 +70,7 @@ $detect = new Mobile_Detect;
                                         <td><?= $item->idm; ?></td>
                                         <td><?= $item->comercial_name; ?></td>
                                         <td><?= $item->name; ?></td>
+                                        <td class="text-center"><?= $item->status == 1 ? '<span class="label label-success">Ativo</span>' : '<span class="label label-danger">Inativo</span>'; ?></td>
                                         <td class="text-center">
                                             <a href="javascript:;" data-target="#modal"
                                                onclick="showDetalhes(<?= $item->id_estabelecimento ?>)"

@@ -163,6 +163,26 @@ class Estabelecimento extends CI_Controller {
         $this->load->view('admin/estabelecimento_detalhe', $dados);
     }
 
+    public function consultaObservacao() {
+        $this->session_verifier();
+        $id_estabelecimento = $this->input->get("id");
+        $this->load->model('observacao_model', 'observacao');
+        $observacao = $this->observacao->consultaObservacao($id_estabelecimento);
+
+        $dados = array(
+            "observacao" => $observacao
+        );
+
+        // registro de log
+        $usuario_logado = $this->session->userdata('usuario_logado');
+        $this->log_model->registrar_acao($usuario_logado,
+            'ESTABELECIMENTO/CONSULTAR/DETALHAR/ABA VENDEDOR',
+            'SELECT',
+            $id_estabelecimento);
+
+        $this->load->view('admin/estabelecimento_vendedor', $dados);
+    }
+
     public function edit() {
         $this->session_verifier();
         $id = $this->input->get("id");

@@ -25,5 +25,5 @@
         <textarea id="observation" name="observacao" class="form-control" disabled><?= $observacao["observacao"]; ?></textarea>
     </div>
 
-    <input type="hidden" name="id_estabelecimento" value="<?= $id_estabelecimento; ?>" />
+    <input type="hidden" name="id_estabelecimento" value="<?= $estabelecimento_id; ?>" />
 </form>

@@ -10,7 +10,7 @@ class Observacao extends CI_Controller {
 
         $dados = array(
             "observacao" => $observacao,
-            "id_estabelecimento" => $id_estabelecimento
+            "estabelecimento_id" => $id_estabelecimento
         );
 
         $this->load->view('admin/estabelecimento_observacao', $dados);

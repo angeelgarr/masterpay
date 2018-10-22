@@ -27,7 +27,12 @@ class Observacao_model extends CI_Model
     public function atualizarPorId($id)
     {
         $this->db->where('id', $id);
+        
+        $usuario_logado = $this->session->userdata('usuario_logado');
+
         $dados['observacao'] = $this->input->post('observacao');
+        $dados['data'] = date('Y-m-d H:i:s');
+        $dados['usuario'] = $usuario_logado;
 
         if ($this->db->update('tab_observacao', $dados)) {
             $usuario = $this->session->userdata('usuario_logado');
@@ -49,6 +54,10 @@ class Observacao_model extends CI_Model
     {
         $dados['observacao'] = $this->input->post("observacao");
         $dados['estabelecimento_id'] = $this->input->post("id_estabelecimento");
+        $dados['data'] = date('Y-m-d H:i:s');
+
+        $usuario_logado = $this->session->userdata('usuario_logado');
+        $dados['usuario'] = $usuario_logado;
 
         if ($this->db->insert('tab_observacao',$dados)) {
             $usuario = $this->session->userdata('usuario_logado');

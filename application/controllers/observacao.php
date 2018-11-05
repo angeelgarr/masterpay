@@ -6,28 +6,20 @@ class Observacao extends CI_Controller {
         $this->session_verifier();
         $id_estabelecimento = $this->input->get("id");
         $this->load->model('observacao_model', 'observacao');
-        $observacao = $this->observacao->buscaPorId($id_estabelecimento);
+        $observacoes = $this->observacao->buscaPorId($id_estabelecimento);
 
         $dados = array(
-            "observacao" => $observacao,
+            "observacoes" => $observacoes,
             "estabelecimento_id" => $id_estabelecimento
         );
 
         $this->load->view('admin/estabelecimento_observacao', $dados);
     }
 
-    public function edit() {
-        $this->output->enable_profiler(TRUE);
+    public function add() {
         $this->session_verifier();
-        $id = $this->input->get("id");
-
         $this->load->model("observacao_model", "observacao");
-
-        if($id){
-            $this->observacao->atualizarPorId($id);
-        } else {
-            $this->observacao->cadastrarObservacao();
-        }
+        $this->observacao->cadastrarObservacao();
     }
 
 	public function session_verifier() {

@@ -21,7 +21,7 @@ class Observacao_model extends CI_Model
 
         return $this->db->get_where("tab_observacao", array(
             "estabelecimento_id" => $id
-        ))->row_array();
+        ))->result();
     }
 
     public function atualizarPorId($id)
